@@ -9,11 +9,13 @@ module.exports = {
     inline:true,
     port: 8080
   },
-  entry: './App.js',
+  entry: {
+		main: ['babel-polyfill', './app.js'] //для работы async / await
+	},
   output:{ 
 	path: __dirname, // путь к каталогу выходных файлов
-	filename: "bundle.js"  // название создаваемого файла 
-}, 
+	filename: "bundle.js",  // название создаваемого файла
+	}, 
   module: {
     rules: [
 		{
@@ -31,7 +33,10 @@ module.exports = {
       }
     ]
   },
+  devServer: {
+    historyApiFallback: true, //для react-router-dom (cannot get какой-то url)
+  },
   plugins: [
 	extractCSS
-]
+	]
 };

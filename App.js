@@ -1,6 +1,9 @@
 ﻿import React from 'react';
 import ReactDOM from 'react-dom';
 
+//для работы async / await
+import "babel-polyfill";
+
 //route
 import { BrowserRouter } from 'react-router-dom';
 import { Route } from 'react-router-dom';
