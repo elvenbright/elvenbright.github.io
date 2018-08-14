@@ -8,14 +8,14 @@ class Block_Page extends React.PureComponent {
 	
 	run = async () => {
 		console.log('123s');
-		isoFetch('https://api.steampowered.com/IEconDOTA2_570/GetHeroes/v0001/?key=8BF24A2B3BEA4957FBC230A31E75AC63', {
+		/*
+		isoFetch('http://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v2/?key=8BF24A2B3BEA4957FBC230A31E75AC63&appid=8930', {
 			method: 'GET',
-			mode: 'no-cors',
-			
 		})
 		.then(response => response.json())
 		.then(json => console.log(json))
-
+		*/
+		
 		/*
 		let answer;
 			try {
