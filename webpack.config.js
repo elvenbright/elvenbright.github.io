@@ -15,6 +15,7 @@ module.exports = {
   output:{ 
 	path: __dirname, // путь к каталогу выходных файлов
 	filename: "bundle.js",  // название создаваемого файла
+	publicPath: '/'
 	}, 
   module: {
     rules: [
