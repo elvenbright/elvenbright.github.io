@@ -8,51 +8,58 @@ class Block_Page extends React.PureComponent {
 	
 	run = async () => {
 		console.log('123s');
+		isoFetch('https://api.steampowered.com/IEconDOTA2_570/GetHeroes/v0001/?key=8BF24A2B3BEA4957FBC230A31E75AC63', {
+			method: 'POST',
+			body: JSON.stringify({
+				title: 'foo',
+				body: 'bar',
+				userId: 1
+				}),
+			headers: {
+				"Content-type": "application/json; charset=UTF-8"
+			}
+		})
+		.then(response => response.json())
+		.then(json => console.log(json))
+
 		/*
-		isoFetch({
-			URI: "https://mobile.service-it.by:8003/SBOLServer/rest/currency/bankObj",
-			fetchOptions: {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-					'Accept': 'application/json',
-				},
-				body: JSON.stringify({
-					
-				})
-			}
-		})
-		.then(function(response) {
-			if (response.status >= 400) {
-				throw new Error("Bad response from server");
-			}
-			return response;
-		})
-		.then(function(stories) {
-			console.log(stories);
-		});
-		*/
-		
 		let answer;
-		try {
-			answer = await isoFetch({
-				URI: "https://jsonplaceholder.typicode.com/todos/1",
-				fetchOptions: {
+			try {
+				answer = await isoFetch('https://jsonplaceholder.typicode.com/posts', {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json',
 						'Accept': 'application/json',
 					},
 					body: JSON.stringify({
-						pre: 321
-					})
-				}
-			},);
-		} catch (e) {
-			console.log('error', e);
-		}
-		console.log("ответ",answer);
-		
+						title: 'foo',
+						body: 'bar',
+						userId: 1
+					  })
+				});
+				
+			} catch (e) {
+				console.log('error', e);
+			}
+			answer.json().then( data => {
+				console.log(data);
+			});
+		*/
+		/*
+		isoFetch('https://jsonplaceholder.typicode.com/posts', {
+			method: 'POST',
+			body: JSON.stringify({
+				title: 'foo',
+				body: 'bar',
+				userId: 1
+				}),
+			headers: {
+				"Content-type": "application/json; charset=UTF-8"
+			}
+		})
+		.then(response => response.json())
+		.then(json => console.log(json))
+		*/
 	};
 	
 	 
