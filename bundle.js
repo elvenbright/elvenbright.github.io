@@ -24879,15 +24879,8 @@ var Block_Page = function (_React$PureComponent) {
 						case 0:
 							console.log('123s');
 							(0, _isomorphicFetch2.default)('https://api.steampowered.com/IEconDOTA2_570/GetHeroes/v0001/?key=8BF24A2B3BEA4957FBC230A31E75AC63', {
-								method: 'POST',
-								body: JSON.stringify({
-									title: 'foo',
-									body: 'bar',
-									userId: 1
-								}),
-								headers: {
-									"Content-type": "application/json; charset=UTF-8"
-								}
+								method: 'GET'
+
 							}).then(function (response) {
 								return response.json();
 							}).then(function (json) {
