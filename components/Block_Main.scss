@@ -18,47 +18,31 @@
 
 		}
 	}
-	
-	
-	
-	.gradient-border {
-		--borderWidth: 3px;
-		background: #1D1F20;
-		position: relative;
-		border-radius: var(--borderWidth);
+	.wrapButtons{
 		display: flex;
-		align-items: center;
 		justify-content: center;
-		width: 400px;
-		height: 200px;
-		color: white;
-		font-family: 'Raleway';
-		font-size: 2.5rem;
+		padding-top: 36px;
+		.button{
+			text-shadow: 1px 1px 0 #fff, 9px 8px 0 rgba(0,0,0,.15);
+			cursor: pointer;
+			font-size: 1.5em;
+			padding: 40px;
+			color: #E5AD5C;
+			text-decoration: none;
+			transition: all 0.5s;
+			&:hover{
+				color: #ffffff;
+				animation: neon 1.5s ease-in-out infinite alternate;
+			}
+		}
 	}
-	.gradient-border:after {
-		content: '';
-		position: absolute;
-		top: calc(-1 * var(--borderWidth));
-		left: calc(-1 * var(--borderWidth));
-		height: calc(100% + var(--borderWidth) * 2);
-		width: calc(100% + var(--borderWidth) * 2);
-		background: linear-gradient(60deg, #f79533, #f37055, #ef4e7b, #a166ab, #5073b8, #1098ad, #07b39b, #6fba82);
-		border-radius: calc(2 * var(--borderWidth));
-		z-index: -1;
-		animation: animatedgradient 3s ease alternate infinite;
-		background-size: 300% 300%;
-	}
+	@keyframes neon {
+		from {
+			text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #FF9900, 0 0 70px #FF9900, 0 0 80px #FF9900, 0 0 100px #FF9900, 0 0 150px #FF9900;
+		  }
+		  to {
+			text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #FF9900, 0 0 35px #FF9900, 0 0 40px #FF9900, 0 0 50px #FF9900, 0 0 75px #FF9900;
+		  }
+	  }	
 	
-	
-	@keyframes animatedgradient {
-		0% {
-			background-position: 0% 50%;
-		}
-		50% {
-			background-position: 100% 50%;
-		}
-		100% {
-			background-position: 0% 50%;
-		}
-	}
 }

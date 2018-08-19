@@ -30,11 +30,9 @@ class Block_Main extends React.PureComponent {
 			<div className="mainFragment">
 				<div><img src="img/logoAnim.gif"/></div>
 			</div>
-			<div className="gradient-border">Animated <br/>CSS<br/>Gradient Border</div>
-			
-			
-			<div className={"font"} >
-			 <NavLink to="/url1" activeClassName="SActivated">Page 1</NavLink>
+			<div className="wrapButtons">
+				<a href="http://www.dota2.com" className="button">Official site</a>
+				<NavLink to="/url1" className="button" activeClassName="SActivated">Enter</NavLink>
 			</div>
 			
 		</div>);
