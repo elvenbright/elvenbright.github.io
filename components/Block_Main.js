@@ -27,16 +27,15 @@ class Block_Main extends React.PureComponent {
 		consoleUtils();
 		return (
 		<div className={"Block_Main"}>
-			<input type="input" onChange={this.changeText} value={this.state.text}/>
-			<input type="button" value="add" onClick={this.addFriend} />
-			<input type="button" value="remove" onClick={this.removeFriend} />
+			<div className="mainFragment">
+				<div><img src="img/logoAnim.gif"/></div>
+			</div>
+			<div className="gradient-border">Animated <br/>CSS<br/>Gradient Border</div>
+			
+			
 			<div className={"font"} >
 			 <NavLink to="/url1" activeClassName="SActivated">Page 1</NavLink>
 			</div>
-			<div><img src="img/logo.jpg"/></div>
-			{this.props.friendList.map( (item, index) =>
-			<div key={index}>{item}</div>)}
-
 			
 		</div>);
 	}
