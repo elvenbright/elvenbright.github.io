@@ -3,8 +3,8 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 
 module.exports = {
-  //mode: 'development',
-  mode: 'production',
+  mode: 'development',
+  //mode: 'production',
   devServer: {
     inline:true,
     port: 8080

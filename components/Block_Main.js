@@ -33,6 +33,7 @@ class Block_Main extends React.PureComponent {
 			<div className={"font"} >
 			 <NavLink to="/url1" activeClassName="SActivated">Page 1</NavLink>
 			</div>
+			<div><img src="img/logo.jpg"/></div>
 			{this.props.friendList.map( (item, index) =>
 			<div key={index}>{item}</div>)}
 
