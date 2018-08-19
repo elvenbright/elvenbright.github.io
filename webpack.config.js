@@ -1,10 +1,10 @@
 const path = require('path');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const extractCSS = new ExtractTextPlugin({
-    filename: "bundle.css"
-});
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
 
 module.exports = {
+  //mode: 'development',
+  mode: 'production',
   devServer: {
     inline:true,
     port: 8080
@@ -25,11 +25,22 @@ module.exports = {
 		}
 		},
       {
-        test: /\.scss$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: ['css-loader', 'sass-loader']
-        })
+        test: /\.(scss|css)$/,
+    use: [
+        MiniCssExtractPlugin.loader,
+        {
+            loader: "css-loader",
+            options: {
+                minimize: {
+                    safe: true
+                }
+            }
+        },
+        {
+            loader: "sass-loader",
+            options: {}
+        }
+    ]
       }
     ]
   },
@@ -37,6 +48,10 @@ module.exports = {
     historyApiFallback: true, //для react-router-dom (cannot get какой-то url)
   },
   plugins: [
-	extractCSS
+	new MiniCssExtractPlugin({
+		// Options similar to the same options in webpackOptions.output
+		// both options are optional
+		filename: "bundle.css"
+	  })
 	]
 };
