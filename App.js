@@ -17,7 +17,8 @@ import myReducer from "./redux/reducers";
 
 //components
 import Block_Main from './components/Block_Main';
-import Block_Page from './components/Block_Page';
+import Block_Filter from './components/Block_Filter';
+import Block_Selected from './components/Block_Selected';
 
 let store = createStore(
 	combineReducers({
@@ -31,7 +32,8 @@ ReactDOM.render(
 		<BrowserRouter>
 			<React.Fragment>
 				<Route path="/" exact component={Block_Main} />
-				<Route path="/url1" component={Block_Page} />
+				<Route path="/filter" component={Block_Filter} />
+				<Route path="/selected" component={Block_Selected} />
 			</React.Fragment>
 		</BrowserRouter>
 	</Provider>

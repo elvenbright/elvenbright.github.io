@@ -1,0 +1,52 @@
+@import "../core/main";
+
+.Block_Filter{
+	.top-logo{
+		margin: 20px;
+		padding: 90px;
+		>img{
+			width: 100%;
+		}
+	}
+	.menu-block{
+		margin: 20px;
+		display: flex;
+		justify-content: space-around;
+		>div{
+			border: none;
+		}
+	}
+	.content{
+		margin: 20px;
+		font-family: 'Flower';
+		color: white;
+		.spinner{
+			display: flex;
+			justify-content: center;
+			margin-top: 150px;
+		}
+	}
+
+	////////////////////
+	.example-enter {
+	opacity: 0.01;
+	width: 0px;
+	}
+	
+	.example-enter.example-enter-active {
+	opacity: 1;
+	width: 100%;
+	transition: 700ms;
+	}
+	
+	.example-leave {
+	opacity: 1;
+	width: 100%;
+	}
+	
+	.example-leave.example-leave-active {
+	opacity: 0.01;
+	width: 0px;
+	transition: 700ms;
+	}
+}

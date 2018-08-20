@@ -30,9 +30,19 @@ class Block_Main extends React.PureComponent {
 			<div className="mainFragment">
 				<div><img src="img/logoAnim.gif"/></div>
 			</div>
-			<div className="wrapButtons">
-				<a href="http://www.dota2.com" className="button">Official site</a>
-				<NavLink to="/url1" className="button" activeClassName="SActivated">Enter</NavLink>
+			<div className="midWrap">
+				<div className="wrapButtons">
+					<a href="http://www.dota2.com" className="btn">Official site</a>
+					<NavLink to="/filter" className="btn" activeClassName="SActivated">Enter site</NavLink>
+					<div className="invisElem"></div>
+				</div>
+			</div>
+			<hr/>
+			<div className="under">
+
+				{/* <img className="cur" src="img/cur.gif"/>
+				<img className="ward" src="img/ward.gif"/> */}
+				
 			</div>
 			
 		</div>);

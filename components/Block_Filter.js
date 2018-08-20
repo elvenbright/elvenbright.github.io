@@ -1,11 +1,12 @@
-"use strict";
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import RTG from 'react-addons-css-transition-group';
 import {default as isoFetch} from 'isomorphic-fetch';
-import './Block_Page.scss';
+import './Block_Filter.scss';
+import {Spiner} from '../primitive/Spiner';
 
-class Block_Page extends React.PureComponent {
+
+class Block_Filter extends React.PureComponent {
 	
 	run = async () => {
 		console.log('123s');
@@ -76,15 +77,27 @@ class Block_Page extends React.PureComponent {
   	render() {
 		console.log(this.state.arr);
 		return (
-			<div className={"Block_Page"}>
-				<NavLink to="/" activeClassName="SActivated">Вернуться</NavLink>
-				<div onClick={this.run}>get some</div>
+			<div className={"Block_Filter"}>
+				<div className="top-logo"><img src="img/Logo2.png"/></div>
+				<hr/>
+				<div className="menu-block">
+					<div className="btn">News</div>
+					<div className="btn">Heroes</div>
+					<div className="btn">Items</div>
+				</div>
+				<div className="content">
+					<div className="spinner"><Spiner/></div>
+				</div>
+				
+				<NavLink to="/selected" style={{cursor:"pointer",color:"white", fontFamily: 'Flower'}} activeClassName="SActivated">get some</NavLink>
 				<div><button onClick={this.add}>ADD</button><button onClick={this.del}>DELETE</button></div>
 				<RTG transitionName="example" transitionEnterTimeout={700} transitionLeaveTimeout={700}>
 				{this.state.arr.map((item,i)=>{
-					return <div key={i} style={{border:"1px solid white",color:"white"}}>{item}</div>
+					return <div key={i} style={{border:"1px solid white",color:"white", fontFamily: 'Flower'}}>{item}</div>
 				})}
 				</RTG>
+
+
 			</div>
 		);
 
@@ -92,4 +105,4 @@ class Block_Page extends React.PureComponent {
 
 }
 
-export default Block_Page;
+export default Block_Filter;

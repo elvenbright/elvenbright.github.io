@@ -1,5 +1,16 @@
 @font-face {
-	font-family: 'Hanalei';
-	src: url('HanaleiFill-Regular.ttf');
+	font-family: 'Raleway';
+	src: url('Raleway-Regular.ttf');
 	font-style: normal;
-  }
+}
+@font-face {
+	font-family: 'Flower';
+	src: url('IndieFlower.ttf');
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Nosifer';
+	src: url('Nosifer-Regular.ttf');
+	font-style: normal;
+}
