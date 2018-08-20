@@ -1,8 +1,9 @@
 "use strict";
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-
+import RTG from 'react-addons-css-transition-group';
 import {default as isoFetch} from 'isomorphic-fetch';
+import './Block_Page.scss';
 
 class Block_Page extends React.PureComponent {
 	
@@ -56,14 +57,34 @@ class Block_Page extends React.PureComponent {
 		*/
 	};
 	
-	 
-	
+	//react transitiongroup
+	state = {
+		arr:[],
+	}
+	add = () => {
+		console.log('hi');
+		let a = [...this.state.arr];
+		a.push('hello');
+		this.setState({arr:a});
+	};
+	del = () => {
+		let n = [...this.state.arr];
+		n.pop();
+		console.log('wtf',n);
+		this.setState({arr:n});
+	};
   	render() {
-
+		console.log(this.state.arr);
 		return (
-			<div className={"Block_Filter"}>
+			<div className={"Block_Page"}>
 				<NavLink to="/" activeClassName="SActivated">Вернуться</NavLink>
 				<div onClick={this.run}>get some</div>
+				<div><button onClick={this.add}>ADD</button><button onClick={this.del}>DELETE</button></div>
+				<RTG transitionName="example" transitionEnterTimeout={700} transitionLeaveTimeout={700}>
+				{this.state.arr.map((item,i)=>{
+					return <div key={i} style={{border:"1px solid white",color:"white"}}>{item}</div>
+				})}
+				</RTG>
 			</div>
 		);
 
