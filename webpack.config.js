@@ -1,10 +1,15 @@
 const path = require('path');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
-  mode: 'development',
-  //mode: 'production',
+  //mode: 'development',
+  mode: 'production',
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin()
+    ]
+  },
   devServer: {
     inline:true,
     port: 8080
