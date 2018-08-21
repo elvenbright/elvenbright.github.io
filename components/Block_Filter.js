@@ -4,6 +4,8 @@ import RTG from 'react-addons-css-transition-group';
 import {default as isoFetch} from 'isomorphic-fetch';
 import './Block_Filter.scss';
 import {Spiner} from '../primitive/Spiner';
+import {connect} from "react-redux";
+import {loadNews,loadHeroes,loadItems} from "../redux/AC";
 
 
 class Block_Filter extends React.PureComponent {
@@ -74,16 +76,33 @@ class Block_Filter extends React.PureComponent {
 		console.log('wtf',n);
 		this.setState({arr:n});
 	};
+////////////////////
+	loadNews = async () => {
+		let answer;
+		isoFetch('http://api.steampowered.com/ISteamNews/GetNewsForApp/v0002/?l=german&appid=570&key=8BF24A2B3BEA4957FBC230A31E75AC63', {
+			method: 'GET',
+		})
+		.then(response => response.json())
+		.then(json => answer = json)
+		
+	};
+	loadHeroes = () => {
+		
+	};
+	loadItems = () => {
+		
+	};
+
   	render() {
-		console.log(this.state.arr);
+		console.log(this.props.reducer);
 		return (
 			<div className={"Block_Filter"}>
 				<div className="top-logo"><img src="img/Logo2.png"/></div>
 				<hr/>
 				<div className="menu-block">
-					<div className="btn">News</div>
-					<div className="btn">Heroes</div>
-					<div className="btn">Items</div>
+					<div onClick={this.loadNews} className="btn">News</div>
+					<div onClick={this.loadHeroes} className="btn">Heroes</div>
+					<div onClick={this.loadItems} className="btn">Items</div>
 				</div>
 				<div className="content">
 					<div className="spinner"><Spiner/></div>
@@ -105,4 +124,9 @@ class Block_Filter extends React.PureComponent {
 
 }
 
-export default Block_Filter;
+//export default Block_Filter
+
+export default connect((state) => ({
+	reducer: state.reducer
+}),
+{loadNews,loadHeroes,loadItems})(Block_Filter);

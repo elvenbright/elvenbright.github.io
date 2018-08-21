@@ -50,11 +50,5 @@ class Block_Main extends React.PureComponent {
 
 }
 
-export default connect((state) => {
-	console.log('state', state);
-	return {
-		friendList: state.myReducer.list,
-	}
-},
-{addFriend,removeLastFriend})(Block_Main);
+export default Block_Main;
 

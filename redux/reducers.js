@@ -1,13 +1,30 @@
 let initialState = {
-	list: [],
+	news:{
+		data: {},
+		loading: false,
+		isLoaded: false,
+	},
+	heroes:{
+		data: {},
+		loading: false,
+		isLoaded: false,
+	},
+	items:{
+		data: {},
+		loading: false,
+		isLoaded: false,
+	}
 };
 
 export default (state = initialState, action) => {
 	switch(action.type) {
-		case "ADD_FRIEND": {
+		case "NEWS_LOADING": {
 			return {
 				...state,
-				list: state.list.concat(action.payload.friend)
+				news: {
+					...news,
+					loading: true,
+				}
 			}
 		}
 		case "REMOVE_FRIEND": {

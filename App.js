@@ -13,7 +13,7 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { combineReducers } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import myReducer from "./redux/reducers";
+import reducer from "./redux/reducers";
 
 //components
 import Block_Main from './components/Block_Main';
@@ -22,7 +22,7 @@ import Block_Selected from './components/Block_Selected';
 
 let store = createStore(
 	combineReducers({
-		myReducer,
+		reducer,
 	  }),
 	  composeWithDevTools()
 );
