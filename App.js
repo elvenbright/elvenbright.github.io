@@ -10,22 +10,32 @@ import { Route } from 'react-router-dom';
 
 //redux
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { combineReducers } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import reducer from "./redux/reducers";
+
+//middlewares для работы асинхронных action's
+import thunk from 'redux-thunk';
 
 //components
 import Block_Main from './components/Block_Main';
 import Block_Filter from './components/Block_Filter';
 import Block_Selected from './components/Block_Selected';
 
-let store = createStore(
-	combineReducers({
-		reducer,
-	  }),
-	  composeWithDevTools()
-);
+
+const enhancer = applyMiddleware(thunk);
+
+const composeEnhancers = composeWithDevTools({
+	// Specify here name, actionsBlacklist, actionsCreators and other options
+});
+const store = createStore(combineReducers({
+	reducer,
+	}), composeEnhancers(
+		enhancer,
+	// other store enhancers if any
+));
+
 
 ReactDOM.render(
 	<Provider store={store}>

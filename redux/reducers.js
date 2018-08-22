@@ -21,10 +21,6 @@ export default (state = initialState, action) => {
 		case "NEWS_LOADING": {
 			return {
 				...state,
-				news: {
-					...news,
-					loading: true,
-				}
 			}
 		}
 		case "REMOVE_FRIEND": {

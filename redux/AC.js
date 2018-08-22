@@ -1,18 +1,28 @@
-export const loadNews = () => {
-	/*
+import isoFetch from 'isomorphic-fetch';
+
+
+export const loadNews = (dispatch, getState) => async () => {
 	let answer;
-	try {
-		answer = await fetch('https://cors-anywhere.herokuapp.com/http://www.dota2.com/jsfeed/abilitydata?language=zh', {
-			method: 'GET',
-		});
-		
-	} catch (e) {
-		console.log('error', e);
-	}
-	answer.json().then( data => {
-		console.log(data);
-	});
-*/
+			try {
+				answer = await isoFetch('https://jsonplaceholder.typicode.com/posts', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+						'Accept': 'application/json',
+					},
+					body: JSON.stringify({
+						title: 'foo',
+						body: 'bar',
+						userId: 1
+					  })
+				});
+				
+			} catch (e) {
+				console.log('error', e);
+			}
+			answer.json().then( data => {
+				console.log(data);
+			});
 	return{
 		type: "NEWS_LOADING"
 	}
@@ -31,4 +41,3 @@ export const loadItems = () => {
 		type: "REMOVE_FRIEND",
 	}
 };
-

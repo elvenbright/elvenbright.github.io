@@ -12,13 +12,13 @@ class Block_Filter extends React.PureComponent {
 	
 	run = async () => {
 		console.log('123s');
-		/*
+		
 		isoFetch('http://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v2/?key=8BF24A2B3BEA4957FBC230A31E75AC63&appid=8930', {
 			method: 'GET',
 		})
 		.then(response => response.json())
 		.then(json => console.log(json))
-		*/
+		
 		
 		/*
 		let answer;
@@ -100,8 +100,8 @@ class Block_Filter extends React.PureComponent {
 				<div className="top-logo"><img src="img/Logo2.png"/></div>
 				<hr/>
 				<div className="menu-block">
-					<div onClick={this.loadNews} className="btn">News</div>
-					<div onClick={this.loadHeroes} className="btn">Heroes</div>
+					<div onClick={this.props.loadNews} className="btn">News</div>
+					<div onClick={this.run} className="btn">Heroes</div>
 					<div onClick={this.loadItems} className="btn">Items</div>
 				</div>
 				<div className="content">
