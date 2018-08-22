@@ -15,6 +15,7 @@ let initialState = {
 		isLoaded: false,
 	}
 };
+
 //export default (state = initialState, {type,payload}) - сокращенная запись
 export default (state = initialState, action) => {
 	switch(action.type) {
@@ -28,11 +29,50 @@ export default (state = initialState, action) => {
 			}
 		}
 		case "NEWS_LOADED": {
-			console.log(action.payload)
 			return {
 				...state,
 				news:{
 					...state.news,
+					loading: false,
+					isLoaded: true,
+					data: action.payload,
+				}
+			}
+		}
+		case "HEROES_LOADING": {
+			return {
+				...state,
+				heroes:{
+					...state.heroes,
+					loading: true,
+				}
+			}
+		}
+		case "HEROES_LOADED": {
+			return {
+				...state,
+				heroes:{
+					...state.heroes,
+					loading: false,
+					isLoaded: true,
+					data: action.payload,
+				}
+			}
+		}
+		case "ITEMS_LOADING": {
+			return {
+				...state,
+				items:{
+					...state.items,
+					loading: true,
+				}
+			}
+		}
+		case "ITEMS_LOADED": {
+			return {
+				...state,
+				items:{
+					...state.items,
 					loading: false,
 					isLoaded: true,
 					data: action.payload,

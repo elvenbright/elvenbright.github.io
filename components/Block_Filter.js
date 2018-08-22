@@ -5,20 +5,13 @@ import {default as isoFetch} from 'isomorphic-fetch';
 import './Block_Filter.scss';
 import {Spiner} from '../primitive/Spiner';
 import {connect} from "react-redux";
-import {gg,loadNews,loadHeroes,loadItems} from "../redux/AC";
+import {loadNews,loadHeroes,loadItems} from "../redux/AC";
 
 
 class Block_Filter extends React.PureComponent {
 	
 	run = async () => {
 		console.log('123s');
-		
-		isoFetch('http://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v2/?key=8BF24A2B3BEA4957FBC230A31E75AC63&appid=8930', {
-			method: 'GET',
-		})
-		.then(response => response.json())
-		.then(json => console.log(json))
-		
 		
 		/*
 		let answer;
@@ -94,7 +87,6 @@ class Block_Filter extends React.PureComponent {
 	};
 
   	render() {
-		console.log(this.props.reducer);
 		return (
 			<div className={"Block_Filter"}>
 				<div className="top-logo"><img src="img/Logo2.png"/></div>
@@ -102,7 +94,7 @@ class Block_Filter extends React.PureComponent {
 				<div className="menu-block">
 					<div onClick={this.props.loadNews} className="btn">News</div>
 					<div onClick={this.props.loadHeroes} className="btn">Heroes</div>
-					<div onClick={this.loadItems} className="btn">Items</div>
+					<div onClick={this.props.loadItems} className="btn">Items</div>
 				</div>
 				<div className="content">
 					<div className="spinner"><Spiner/></div>
@@ -129,4 +121,4 @@ class Block_Filter extends React.PureComponent {
 export default connect((state) => ({
 	reducer: state.reducer
 }),
-{gg,loadNews,loadHeroes,loadItems})(Block_Filter);
+{loadNews,loadHeroes,loadItems})(Block_Filter);

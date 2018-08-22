@@ -1,4 +1,9 @@
 import isoFetch from 'isomorphic-fetch';
+
+//backup если не загрузятся данные
+import heroesBackUpJson from "../jsonBackUp/heroes";
+import itemsBackUpJson from "../jsonBackUp/items";
+import newsBackUpJson from "../jsonBackUp/news";
 /*
 export const gg = () => dispatch => {
 	setTimeout(() => {
@@ -22,31 +27,98 @@ export const loadNews = () => async (dispatch, getState) => {
 	} catch (e) {
 		console.log('error', e);
 	}
-	answer.json().then( data => {
-		answer=data;
+	console.log("answer",answer);
+	if(answer===undefined){
 		dispatch({
 			type: 'NEWS_LOADED',
-			payload: answer
+			payload: newsBackUpJson
+		})
+	}
+	else{
+		answer.json().then( data => {
+			dispatch({
+				type: 'NEWS_LOADED',
+				payload: data
+			})
 		});
+	}
+	
+	/*
+	isoFetch('http://api.steampowered.com/ISteamNews/GetNewsForApp/v0002/?l=german&appid=570&key=8BF24A2B3BEA4957FBC230A31E75AC63', {
+		method: 'GET',
+	})
+	.then(response => response.json())
+	.then(json => 
+		dispatch({
+			type: 'NEWS_LOADED',
+			payload: json
+		})
+	)
+	*/	
+};
+
+
+export const loadHeroes = () => async (dispatch, getState) => {
+	
+	dispatch({
+        type: 'HEROES_LOADING'
 	});
-	
-	
-	
 
-
+	let answer;
+	try {
+		answer = await fetch('https://cors-anywhere.herokuapp.com/http://www.dota2.com/jsfeed/heropickerdata', {
+					method: 'GET',
+				});
+		
+	} catch (e) {
+		console.log('error', e);
+	}
+	console.log("answer",answer);
+	if(answer===undefined){
+		dispatch({
+			type: 'HEROES_LOADED',
+			payload: heroesBackUpJson
+		})
+	}
+	else{
+		answer.json().then( data => {
+			dispatch({
+				type: 'HEROES_LOADED',
+				payload: data
+			})
+		});
+	}
 	
 };
+export const loadItems = () => async (dispatch, getState) => {
+	
+	dispatch({
+        type: 'ITEMS_LOADING'
+	});
 
-export const loadHeroes = () => {
-    return{
-		type: "NEWS_LOADING",
+	let answer;
+	try {
+		answer = await fetch('https://cors-anywhere.herokuapp.com/http://www.dota2.com/jsfeed/itemdata', {
+					method: 'GET',
+				});
+		
+	} catch (e) {
+		console.log('error', e);
 	}
-};
-export const loadItems = () => {
-    return{
-		type: "REMOVE_FRIEND",
-		payload: {
-			friend: e
-		}
+	console.log("answer",answer);
+	if(answer===undefined){
+		dispatch({
+			type: 'ITEMS_LOADED',
+			payload: itemsBackUpJson
+		})
 	}
+	else{
+		answer.json().then( data => {
+			dispatch({
+				type: 'ITEMS_LOADED',
+				payload: data
+			})
+		});
+	}
+	
 };
