@@ -5,7 +5,7 @@ import {default as isoFetch} from 'isomorphic-fetch';
 import './Block_Filter.scss';
 import {Spiner} from '../primitive/Spiner';
 import {connect} from "react-redux";
-import {loadNews,loadHeroes,loadItems} from "../redux/AC";
+import {gg,loadNews,loadHeroes,loadItems} from "../redux/AC";
 
 
 class Block_Filter extends React.PureComponent {
@@ -101,7 +101,7 @@ class Block_Filter extends React.PureComponent {
 				<hr/>
 				<div className="menu-block">
 					<div onClick={this.props.loadNews} className="btn">News</div>
-					<div onClick={this.run} className="btn">Heroes</div>
+					<div onClick={this.props.loadHeroes} className="btn">Heroes</div>
 					<div onClick={this.loadItems} className="btn">Items</div>
 				</div>
 				<div className="content">
@@ -129,4 +129,4 @@ class Block_Filter extends React.PureComponent {
 export default connect((state) => ({
 	reducer: state.reducer
 }),
-{loadNews,loadHeroes,loadItems})(Block_Filter);
+{gg,loadNews,loadHeroes,loadItems})(Block_Filter);

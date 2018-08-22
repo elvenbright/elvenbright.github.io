@@ -24,6 +24,20 @@ import Block_Filter from './components/Block_Filter';
 import Block_Selected from './components/Block_Selected';
 
 
+let store = createStore(
+	combineReducers({reducer}),
+  	composeWithDevTools(
+		applyMiddleware(thunk)
+	  )
+);
+/*
+const store = createStore(
+	reducer,
+	applyMiddleware(thunk)
+  );
+*/
+
+/*
 const enhancer = applyMiddleware(thunk);
 
 const composeEnhancers = composeWithDevTools({
@@ -34,7 +48,7 @@ const store = createStore(combineReducers({
 	}), composeEnhancers(
 		enhancer,
 	// other store enhancers if any
-));
+));*/
 
 
 ReactDOM.render(
