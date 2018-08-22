@@ -10,6 +10,9 @@ import {loadNews,loadHeroes,loadItems} from "../redux/AC";
 
 class Block_Filter extends React.PureComponent {
 	
+	state = {
+		render: "", //l-loading, n-news, h-heroes, i-items
+	};
 	run = async () => {
 		console.log('123s');
 		
@@ -69,35 +72,47 @@ class Block_Filter extends React.PureComponent {
 		console.log('wtf',n);
 		this.setState({arr:n});
 	};
-////////////////////
-	loadNews = async () => {
-		let answer;
-		isoFetch('http://api.steampowered.com/ISteamNews/GetNewsForApp/v0002/?l=german&appid=570&key=8BF24A2B3BEA4957FBC230A31E75AC63', {
-			method: 'GET',
-		})
-		.then(response => response.json())
-		.then(json => answer = json)
-		
+	contentSwitch = (e) => {
+		let {props:{reducer}} = this;
+		//news
+		if(e==="n"){
+			if(!reducer.news.isLoaded){
+				console.log('делаем запрос');
+				this.props.loadNews();
+			}
+		}
+		//heroes
+		if(e==="h"){
+			if(!reducer.heroes.isLoaded){
+				console.log('делаем запрос');
+				this.props.loadHeroes();
+			}
+		}
+		//items
+		if(e==="i"){
+			if(!reducer.items.isLoaded){
+				console.log('делаем запрос');
+				this.props.loadItems();
+			}
+		}
 	};
-	loadHeroes = () => {
+	renderContent = () => {
 		
+		return <div className="spinner"><Spiner/></div>
 	};
-	loadItems = () => {
-		
-	};
-
   	render() {
+		let {renderContent,contentSwitch} = this;
 		return (
 			<div className={"Block_Filter"}>
 				<div className="top-logo"><img src="img/Logo2.png"/></div>
 				<hr/>
 				<div className="menu-block">
-					<div onClick={this.props.loadNews} className="btn">News</div>
-					<div onClick={this.props.loadHeroes} className="btn">Heroes</div>
-					<div onClick={this.props.loadItems} className="btn">Items</div>
+					<div onClick={()=>contentSwitch("n")} className="btn">News</div>
+					<div onClick={()=>contentSwitch("h")} className="btn">Heroes</div>
+					<div onClick={()=>contentSwitch("i")} className="btn">Items</div>
 				</div>
 				<div className="content">
-					<div className="spinner"><Spiner/></div>
+					{renderContent()}
 				</div>
 				
 				<NavLink to="/selected" style={{cursor:"pointer",color:"white", fontFamily: 'Flower'}} activeClassName="SActivated">get some</NavLink>
