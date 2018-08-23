@@ -109,13 +109,10 @@ class Block_Filter extends React.PureComponent {
 				for(let j=0;j<reducer.news.data.appnews.newsitems.length;j++){
 					output.push(
 						<div key={j}>
-						<TransitionGroup>
-						<CSSTransition  transitionName="example" transitionEnterTimeout={700} transitionLeaveTimeout={700}>
 							<div>{reducer.news.data.appnews.newsitems[j].title}</div>
 							
 							<div dangerouslySetInnerHTML={{__html: reducer.news.data.appnews.newsitems[j].contents}} />
-						</CSSTransition >
-						</TransitionGroup>
+						
 						</div>
 					)
 				}
@@ -163,25 +160,28 @@ class Block_Filter extends React.PureComponent {
 					{render==="n"?
 						(reducer.news.isLoaded===false
 							?<div className="spinner"><Spiner/></div>
-							:<RTG transitionName="example" transitionEnterTimeout={700} transitionLeaveTimeout={700}>
+							:<div>}>
 								{reducer.news.data.appnews.newsitems.map((item,i)=>{
 									return <div key={i} style={{border:"1px solid white",color:"white", fontFamily: 'Flower'}}>
 										<div>{item.title}</div>
 										{/* <div dangerouslySetInnerHTML={{__html: item.contents}} /> */}
 									</div>
 								})}
-							</RTG>
+							</div>
 						)
 					:null}
 				</div>
 			
 
-              
-                    <RTG transitionName="slide-up" transitionAppear={true}>
+              <button>clik</button>
+			  <RTG transitionName="slide-up" 	transitionAppear={true}
+												transitionEnterTimeout={1000}
+												transitionLeaveTimeout={1000}
+			  									transitionAppearTimeout={1000}>
                         {items.map((item, i) => {
                             return <div key={i} className="list-item" style={{"transitionDelay": `${ i * .05 }s` }}>{item}</div>;
                         })}
-                    </RTG>
+                    </RTG>  
                
             	
 				
