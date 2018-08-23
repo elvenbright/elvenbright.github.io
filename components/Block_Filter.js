@@ -13,6 +13,9 @@ class Block_Filter extends React.PureComponent {
 	
 	state = {
 		render: "", //l-loading, n-news, h-heroes, i-items
+		test: [1,2,3,4],
+		test1: false,
+		test2: false,
 	};
 	run = async () => {
 		console.log('123s');
@@ -57,22 +60,7 @@ class Block_Filter extends React.PureComponent {
 		*/
 	};
 	
-	//react transitiongroup
-	state = {
-		arr:[],
-	}
-	add = () => {
-		console.log('hi');
-		let a = [...this.state.arr];
-		a.push('hello');
-		this.setState({arr:a});
-	};
-	del = () => {
-		let n = [...this.state.arr];
-		n.pop();
-		console.log('wtf',n);
-		this.setState({arr:n});
-	};
+	
 	contentSwitch = (e) => {
 		let {props:{reducer}} = this;
 		//news
@@ -141,11 +129,29 @@ class Block_Filter extends React.PureComponent {
 			return <div></div>
 		}
 	};
-	getItems() {
-        return [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
-    }
+	
+	//render engine
+	some = () => {
+		this.setState({
+			test1:true,
+			test2:false,
+		});
+
+	};
+	some2 = () => {
+		this.setState({
+			test1:false,
+			test2:true,
+		});
+	}
+	out = () => {
+		let n = []
+		for(let l=0;l<6;l++){
+			n.push(<div key={l} className="list-item" style={{"transitionDelay": `${ l * .05 }s` }}>{l}</div>)
+		}
+		return n;
+	};
   	render() {
-		const items = this.getItems();
 		let {renderContent,contentSwitch,state:{render},props:{reducer}} = this;
 		return (
 			<div className={"Block_Filter"}>
@@ -173,15 +179,21 @@ class Block_Filter extends React.PureComponent {
 				</div>
 			
 
-              <button>clik</button>
-			  <RTG transitionName="slide-up" 	transitionAppear={true}
+              <button onClick={this.some}>start</button><button onClick={this.some2}>change</button>
+			  <div>{this.state.test1&&<RTG transitionName="slide-up" 	transitionAppear={true}
 												transitionEnterTimeout={1000}
 												transitionLeaveTimeout={1000}
 			  									transitionAppearTimeout={1000}>
-                        {items.map((item, i) => {
-                            return <div key={i} className="list-item" style={{"transitionDelay": `${ i * .05 }s` }}>{item}</div>;
-                        })}
-                    </RTG>  
+                        {this.out()}
+			  </RTG>}
+			  {this.state.test2&&<RTG transitionName="slide-up" 	transitionAppear={true}
+												transitionEnterTimeout={1000}
+												transitionLeaveTimeout={1000}
+			  									transitionAppearTimeout={1000}>
+						{this.out()}
+			  </RTG>}
+			  
+			  </div>
                
             	
 				
