@@ -27,26 +27,26 @@
 		}
 	}
 
+
 	////////////////////
-	.example-enter {
-	opacity: 0.01;
-	width: 0px;
+	.list-item {
+		background-color: #eee;
+		padding: 10px;
+		margin: 5px;
+		
+		height: 200px;
+		
 	}
 	
-	.example-enter.example-enter-active {
-	opacity: 1;
-	width: 100%;
-	transition: 700ms;
-	}
-	
-	.example-leave {
-	opacity: 1;
-	width: 100%;
-	}
-	
-	.example-leave.example-leave-active {
-	opacity: 0.01;
-	width: 0px;
-	transition: 700ms;
+	/* Transition */
+	.slide-up-appear {
+		opacity: 0;
+		transform: translateY(100px);
+		transition: all 0.5s ease;
+		
+		&.slide-up-appear-active {
+			opacity: 1;
+			transform: translateY(0px);
+		}
 	}
 }

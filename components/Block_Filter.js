@@ -8,6 +8,7 @@ import {connect} from "react-redux";
 import {loadNews,loadHeroes,loadItems} from "../redux/AC";
 
 
+
 class Block_Filter extends React.PureComponent {
 	
 	state = {
@@ -108,11 +109,13 @@ class Block_Filter extends React.PureComponent {
 				for(let j=0;j<reducer.news.data.appnews.newsitems.length;j++){
 					output.push(
 						<div key={j}>
-						<RTG transitionName="example" transitionEnterTimeout={700} transitionLeaveTimeout={700}>
+						<TransitionGroup>
+						<CSSTransition  transitionName="example" transitionEnterTimeout={700} transitionLeaveTimeout={700}>
 							<div>{reducer.news.data.appnews.newsitems[j].title}</div>
 							
 							<div dangerouslySetInnerHTML={{__html: reducer.news.data.appnews.newsitems[j].contents}} />
-						</RTG>
+						</CSSTransition >
+						</TransitionGroup>
 						</div>
 					)
 				}
@@ -141,8 +144,12 @@ class Block_Filter extends React.PureComponent {
 			return <div></div>
 		}
 	};
+	getItems() {
+        return [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
+    }
   	render() {
-		let {renderContent,contentSwitch} = this;
+		const items = this.getItems();
+		let {renderContent,contentSwitch,state:{render},props:{reducer}} = this;
 		return (
 			<div className={"Block_Filter"}>
 				<div className="top-logo"><img src="img/Logo2.png"/></div>
@@ -153,16 +160,31 @@ class Block_Filter extends React.PureComponent {
 					<div onClick={()=>contentSwitch("i")} className="btn">Items</div>
 				</div>
 				<div className="content">
-					{renderContent()}
+					{render==="n"?
+						(reducer.news.isLoaded===false
+							?<div className="spinner"><Spiner/></div>
+							:<RTG transitionName="example" transitionEnterTimeout={700} transitionLeaveTimeout={700}>
+								{reducer.news.data.appnews.newsitems.map((item,i)=>{
+									return <div key={i} style={{border:"1px solid white",color:"white", fontFamily: 'Flower'}}>
+										<div>{item.title}</div>
+										{/* <div dangerouslySetInnerHTML={{__html: item.contents}} /> */}
+									</div>
+								})}
+							</RTG>
+						)
+					:null}
 				</div>
+			
+
+              
+                    <RTG transitionName="slide-up" transitionAppear={true}>
+                        {items.map((item, i) => {
+                            return <div key={i} className="list-item" style={{"transitionDelay": `${ i * .05 }s` }}>{item}</div>;
+                        })}
+                    </RTG>
+               
+            	
 				
-				<NavLink to="/selected" style={{cursor:"pointer",color:"white", fontFamily: 'Flower'}} activeClassName="SActivated">get some</NavLink>
-				<div><button onClick={this.add}>ADD</button><button onClick={this.del}>DELETE</button></div>
-				<RTG transitionName="example" transitionEnterTimeout={700} transitionLeaveTimeout={700}>
-				{this.state.arr.map((item,i)=>{
-					return <div key={i} style={{border:"1px solid white",color:"white", fontFamily: 'Flower'}}>{item}</div>
-				})}
-				</RTG>
 
 
 			</div>
