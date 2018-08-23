@@ -77,28 +77,69 @@ class Block_Filter extends React.PureComponent {
 		//news
 		if(e==="n"){
 			if(!reducer.news.isLoaded){
-				console.log('делаем запрос');
 				this.props.loadNews();
 			}
+			this.setState({render:"n"});
 		}
 		//heroes
 		if(e==="h"){
 			if(!reducer.heroes.isLoaded){
-				console.log('делаем запрос');
 				this.props.loadHeroes();
 			}
+			this.setState({render:"h"});
 		}
 		//items
 		if(e==="i"){
 			if(!reducer.items.isLoaded){
-				console.log('делаем запрос');
 				this.props.loadItems();
 			}
+			this.setState({render:"i"});
 		}
 	};
 	renderContent = () => {
-		
-		return <div className="spinner"><Spiner/></div>
+		let {state:{render},props:{reducer}} = this;
+		if(render==="n"){	
+			if(reducer.news.loading===true){
+				return <div className="spinner"><Spiner/></div>
+			}
+			else if(reducer.news.isLoaded===true){
+				let output = [];
+				
+				for(let j=0;j<reducer.news.data.appnews.newsitems.length;j++){
+					output.push(
+						<div key={j}>
+						<RTG transitionName="example" transitionEnterTimeout={700} transitionLeaveTimeout={700}>
+							<div>{reducer.news.data.appnews.newsitems[j].title}</div>
+							
+							<div dangerouslySetInnerHTML={{__html: reducer.news.data.appnews.newsitems[j].contents}} />
+						</RTG>
+						</div>
+					)
+				}
+				return output;
+			}
+			
+		}
+		else if(render==="h"){
+			if(reducer.heroes.loading===true){
+				return <div className="spinner"><Spiner/></div>
+			}
+			else if(reducer.heroes.isLoaded===true){
+				return <div>Render Heroes</div>
+			}
+		}
+		else if(render==="i"){
+			if(reducer.items.loading===true){
+				return <div className="spinner"><Spiner/></div>
+			}
+			else if(reducer.items.isLoaded===true){
+				return <div>Render Items</div>
+			}
+			
+		}
+		else{
+			return <div></div>
+		}
 	};
   	render() {
 		let {renderContent,contentSwitch} = this;
