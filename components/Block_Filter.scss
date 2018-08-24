@@ -27,8 +27,16 @@
 		border: 1px dashed #444;
 		min-height: 70px;
 		position: relative;
+		&On{
+			animation: loadin 2s;
+				opacity: 1;
+		}
 		.menu{
 			&LoadIn{
+				animation: loadin 2s;
+				opacity: 1;
+			}
+			&LoadIn2{
 				animation: loadin 2s;
 				opacity: 1;
 			}

@@ -9,6 +9,7 @@ import FilterBlock from "../primitive/FilterBlock"
 
 
 
+
 class Block_Filter extends React.PureComponent {
 	
 	state = {
@@ -162,7 +163,20 @@ class Block_Filter extends React.PureComponent {
 		}
 		//heroes
 		if(i==="h"){
+			if(r.heroes.loading===true){
 
+			
+				spinStatus = "spinner spinnerLoadIn";
+
+				menuStatus = "menu menuLoadOut";
+
+			}
+			else if(r.heroes.isLoaded===true){
+				spinStatus = "spinner spinnerLoadOut";
+				menuStatus = "menu menuLoadIn";
+
+				menu = <div>Menu Filter Heroes</div>
+			}
 		}
 		//items
 		if(i==="i"){
@@ -171,8 +185,7 @@ class Block_Filter extends React.PureComponent {
 		
 		return <Fragment>
 			<div className={spinStatus}><Spiner/></div>
-			<div className={menuStatus}>{menu}</div>
-			
+			<div key={Math.random()}  className={menuStatus}>{menu}</div>
 		</Fragment>
 	}
 	//delete this
