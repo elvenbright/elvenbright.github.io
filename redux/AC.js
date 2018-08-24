@@ -29,17 +29,21 @@ export const loadNews = () => async (dispatch, getState) => {
 	}
 	console.log("answer",answer);
 	if(answer===undefined){
-		dispatch({
-			type: 'NEWS_LOADED',
-			payload: newsBackUpJson
-		})
+		setTimeout(() => {
+			dispatch({
+				type: 'NEWS_LOADED',
+				payload: newsBackUpJson
+			})
+		  }, 2000)
 	}
 	else{
 		answer.json().then( data => {
-			dispatch({
-				type: 'NEWS_LOADED',
-				payload: data
-			})
+			setTimeout(() => {
+				dispatch({
+					type: 'NEWS_LOADED',
+					payload: newsBackUpJson
+				})
+			  }, 2000)
 		});
 	}
 	
@@ -75,17 +79,21 @@ export const loadHeroes = () => async (dispatch, getState) => {
 	}
 	console.log("answer",answer);
 	if(answer===undefined){
-		dispatch({
-			type: 'HEROES_LOADED',
-			payload: heroesBackUpJson
-		})
+		setTimeout(() => {
+			dispatch({
+				type: 'HEROES_LOADED',
+				payload: heroesBackUpJson
+			})
+		  }, 2000)
 	}
 	else{
 		answer.json().then( data => {
-			dispatch({
-				type: 'HEROES_LOADED',
-				payload: data
-			})
+			setTimeout(() => {
+				dispatch({
+					type: 'HEROES_LOADED',
+					payload: data
+				})
+			  }, 2000)
 		});
 	}
 	
@@ -107,17 +115,21 @@ export const loadItems = () => async (dispatch, getState) => {
 	}
 	console.log("answer",answer);
 	if(answer===undefined){
-		dispatch({
-			type: 'ITEMS_LOADED',
-			payload: itemsBackUpJson
-		})
+		setTimeout(() => {
+			dispatch({
+				type: 'ITEMS_LOADED',
+				payload: itemsBackUpJson
+			})
+		  }, 2000)
 	}
 	else{
 		answer.json().then( data => {
-			dispatch({
-				type: 'ITEMS_LOADED',
-				payload: data
-			})
+			setTimeout(() => {
+				dispatch({
+					type: 'ITEMS_LOADED',
+					payload: data
+				})
+			  }, 2000)
 		});
 	}
 	

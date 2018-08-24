@@ -21,14 +21,53 @@
 		margin: 20px 0;
 		font-family: 'Flower';
 		color: white;
-		.spinner{
-			display: flex;
-			justify-content: center;
-			margin-top: 150px;
-		}
+		
 	}
 	.filter{
 		border: 1px dashed #444;
-		min-height: 50px;
+		min-height: 70px;
+		position: relative;
+		.menu{
+			&LoadIn{
+				animation: loadin 2s;
+				opacity: 1;
+			}
+			&LoadOut{
+				animation: loadout 2s;
+				opacity: 0;
+			}
+		}
+		.spinner{
+			position: absolute;
+			left: 50%;
+			&LoadIn{
+				animation: loadin 2s;
+				opacity: 1;
+			}
+			&LoadOut{
+				animation: loadout 2s;
+				opacity: 0;
+			}
+			&Not{
+				opacity: 0;
+			}
+		}
+		@keyframes loadin {
+			0% {
+				opacity: 0;
+			}
+			100% {
+				opacity: 1;
+			}
+		}
+		@keyframes loadout {
+			0% {
+				opacity: 1;
+			}
+			100% {
+				opacity: 0;
+			}
+		}
+		
 	}
 }

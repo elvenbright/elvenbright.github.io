@@ -1,4 +1,4 @@
-import React from 'react';
+import React ,{Fragment} from 'react';
 import { NavLink } from 'react-router-dom';
 import {default as isoFetch} from 'isomorphic-fetch';
 import './Block_Filter.scss';
@@ -132,10 +132,33 @@ class Block_Filter extends React.PureComponent {
 	};
 	renderFilter = (i,r)=>{
 		//console.log(r); reducer r.news r.items r.heroes
+		
+		let menu = null; //возвращаем наполнение
+		
+		let spinStatus = "spinner spinnerNot";
+		let menuStatus = "menu menuLoadIn";
 
+		//для спинера 
+		let isNewsLoaded = false;
+		let isHeroesLoaded = false;
+		let isItemsLoaded = false;
+		
 		//news
 		if(i==="n"){
+			if(r.news.loading===true){
 
+			
+				spinStatus = "spinner spinnerLoadIn";
+
+				menuStatus = "menu menuLoadOut";
+
+			}
+			else if(r.news.isLoaded===true){
+				spinStatus = "spinner spinnerLoadOut";
+				menuStatus = "menu menuLoadIn";
+
+				menu = <div>Menu Filter News</div>
+			}
 		}
 		//heroes
 		if(i==="h"){
@@ -145,6 +168,12 @@ class Block_Filter extends React.PureComponent {
 		if(i==="i"){
 
 		}
+		
+		return <Fragment>
+			<div className={spinStatus}><Spiner/></div>
+			<div className={menuStatus}>{menu}</div>
+			
+		</Fragment>
 	}
 	//delete this
 	chn= ()=>{
@@ -164,7 +193,8 @@ class Block_Filter extends React.PureComponent {
 					<div onClick={()=>contentSwitch("h")} className="btn">hДепозиты</div>
 					<div onClick={()=>contentSwitch("i")} className="btn">iПродукты</div>
 				</div>
-				<div className="filter">{this.renderFilter(render,reducer)}</div>
+				<div className="filter">
+				{this.renderFilter(render,reducer)}</div>
 				<div className="content">
 				<button onClick={this.chn}>change state</button>
 					{render==="n"?
