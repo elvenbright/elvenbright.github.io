@@ -13,12 +13,38 @@ let initialState = {
 		data: {},
 		loading: false,
 		isLoaded: false,
-	}
+	},
+	abilities:{
+		data: {},
+		loading: false,
+		isLoaded: false,
+	},
+
 };
 
 //export default (state = initialState, {type,payload}) - сокращенная запись
 export default (state = initialState, action) => {
 	switch(action.type) {
+		case "ABILITIES_LOADING": {
+			return {
+				...state,
+				abilities:{
+					...state.abilities,
+					loading: true,
+				}
+			}
+		}
+		case "ABILITIES_LOADED": {
+			return {
+				...state,
+				abilities:{
+					...state.abilities,
+					loading: false,
+					isLoaded: true,
+					data: action.payload,
+				}
+			}
+		}
 		case "NEWS_LOADING": {
 			return {
 				...state,

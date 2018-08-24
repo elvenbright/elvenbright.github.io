@@ -4,6 +4,7 @@ import isoFetch from 'isomorphic-fetch';
 import heroesBackUpJson from "../jsonBackUp/heroes";
 import itemsBackUpJson from "../jsonBackUp/items";
 import newsBackUpJson from "../jsonBackUp/news";
+import abilitiesBackUpJason from "../jsonBackUp/abilities";
 /*
 export const gg = () => dispatch => {
 	setTimeout(() => {
@@ -27,7 +28,6 @@ export const loadNews = () => async (dispatch, getState) => {
 	} catch (e) {
 		console.log('error', e);
 	}
-	console.log("answer",answer);
 	if(answer===undefined){
 		setTimeout(() => {
 			dispatch({
@@ -67,17 +67,55 @@ export const loadHeroes = () => async (dispatch, getState) => {
 	dispatch({
         type: 'HEROES_LOADING'
 	});
+	dispatch({
+        type: 'ABILITIES_LOADING'
+	});
 
 	let answer;
 	try {
-		answer = await fetch('https://cors-anywhere.herokuapp.com/http://www.dota2.com/jsfeed/heropickerdata', {
+		answer = await fetch('https://cors-anywhere.herokuapp.com/http://www.dota2.com/jsfeed/heropickerdata?v=18874723138974056&l=english', {
 					method: 'GET',
 				});
 		
 	} catch (e) {
 		console.log('error', e);
 	}
-	console.log("answer",answer);
+	
+	
+	
+
+	//abilities load
+	let answer2;
+	try {
+		answer2 = await fetch('https://cors-anywhere.herokuapp.com/https://www.dota2.com/jsfeed/heropediadata?feeds=abilitydata&l=english', {
+					method: 'GET',
+				});
+		
+	} catch (e) {
+		console.log('error', e);
+	}
+
+
+	if(answer2===undefined){
+		setTimeout(() => {
+			dispatch({
+				type: 'ABILITIES_LOADED',
+				payload: abilitiesBackUpJason
+			})
+		  }, 2000)
+	}
+	else{
+		answer2.json().then( data => {
+			setTimeout(() => {
+				dispatch({
+					type: 'ABILITIES_LOADED',
+					payload: data
+				})
+			  }, 2000)
+		});
+	}
+	
+	//загружаем героев только когда загрузились абилки
 	if(answer===undefined){
 		setTimeout(() => {
 			dispatch({
@@ -97,6 +135,11 @@ export const loadHeroes = () => async (dispatch, getState) => {
 		});
 	}
 	
+	
+	if(answer&&answer2){
+		console.log(321);
+	}
+	
 };
 export const loadItems = () => async (dispatch, getState) => {
 	
@@ -113,7 +156,6 @@ export const loadItems = () => async (dispatch, getState) => {
 	} catch (e) {
 		console.log('error', e);
 	}
-	console.log("answer",answer);
 	if(answer===undefined){
 		setTimeout(() => {
 			dispatch({
