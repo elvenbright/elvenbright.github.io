@@ -14,11 +14,13 @@ class Block_Filter extends React.PureComponent {
 	
 	state = {
 		render: "", //l-loading, n-news, h-heroes, i-items
-		newsOutput: [],
-		//delete
-		test: [3,2,1],
+		newsOutput: [], //полный массив данных
+		heroesOutput: [],
 
+		news:[], //отсортированный массив
+		heroes:[],
 	};
+
 	run = async () => {
 		console.log('123s');
 		
@@ -74,7 +76,7 @@ class Block_Filter extends React.PureComponent {
 		}
 		//heroes
 		if(e==="h"){
-			if(!reducer.heroes.isLoaded&&!reducer.heroes.loading){
+			if(!reducer.heroes.isLoaded&&!reducer.heroes.loading&&!reducer.abilities.loading&&!reducer.abilities.isLoaded){
 				this.props.loadHeroes();
 			}
 			this.setState({render:"h"});
@@ -108,10 +110,10 @@ class Block_Filter extends React.PureComponent {
 			
 		}
 		else if(render==="h"){
-			if(reducer.heroes.loading===true){
+			if(reducer.heroes.loading===true||reducer.abilities.loading===true){
 				return <div className="spinner"><Spiner/></div>
 			}
-			else if(reducer.heroes.isLoaded===true){
+			else if(reducer.heroes.isLoaded===true&&reducer.abilities.isLoaded===true){
 				return <div>Render Heroes</div>
 			}
 		}
@@ -128,51 +130,7 @@ class Block_Filter extends React.PureComponent {
 			return <div></div>
 		}
 	};
-	static getDerivedStateFromProps(props,state){
-		let newsOutput=[];
-		let heroesOutput=[];
-		if(props.reducer.news.isLoaded===true){
-			for(let j=0;j<props.reducer.news.data.appnews.newsitems.length;j++){
-				newsOutput.push(
-					<div key={j}>
-						<div>{props.reducer.news.data.appnews.newsitems[j].title}</div>
-						
-						<div dangerouslySetInnerHTML={{__html: props.reducer.news.data.appnews.newsitems[j].contents}} />
-					
-					</div>
-				)
-			}
-		}
-		
-		if(props.reducer.heroes.isLoaded===true){
-			let keys=[];
-			for (let n in props.reducer.heroes.data) {
-				//console.log(n);
-				keys.push(n);
-			}
-			for(let p=0;p<keys.length;p++){
-				
-			}
-		}
-		/*
-		if(props.reducer.news.isLoaded===true){
-			for(let j=0;j<props.reducer.news.data.appnews.newsitems.length;j++){
-				newsOutput.push(
-					<div key={j}>
-						<div>{props.reducer.news.data.appnews.newsitems[j].title}</div>
-						
-						<div dangerouslySetInnerHTML={{__html: props.reducer.news.data.appnews.newsitems[j].contents}} />
-					
-					</div>
-				)
-			}
-		}
-		*/
-		return {
-			newsOutput: newsOutput,
-	
-		}
-	}
+	//рендер панели фильтр
 	renderFilter = (i,r)=>{
 		//console.log(r); reducer r.news r.items r.heroes
 		
@@ -200,7 +158,7 @@ class Block_Filter extends React.PureComponent {
 		}
 		//heroes
 		if(i==="h"){
-			if(r.heroes.loading===true){
+			if(r.heroes.loading===true||r.abilities.loading===true){
 
 			
 				spinStatus = "spinner spinnerLoadIn";
@@ -208,7 +166,7 @@ class Block_Filter extends React.PureComponent {
 				menuStatus = "menu menuLoadOut";
 
 			}
-			else if(r.heroes.isLoaded===true){
+			else if(r.heroes.isLoaded===true&&r.abilities.isLoaded===true){
 				spinStatus = "spinner spinnerLoadOut";
 				menuStatus = "menu menuLoadIn";
 
@@ -238,16 +196,82 @@ class Block_Filter extends React.PureComponent {
 			<div key={Math.random()}  className={menuStatus}>{menu}</div>
 		</Fragment>
 	}
-	//delete this
-	chn= ()=>{
-		this.setState({test: [1,2,3]})
+	//фильтруем контент в зависимости от настроек
+	mainFilter=()=>{
+		let {state:{heroesOutput,render}} = this;
+		if(render==="h"){
+			let h=[];
+			for(let q=0;q<heroesOutput.length;q++){
+				//console.log(heroesOutput[q]);
+				h.push(
+					<div key={q}>
+						<div>{heroesOutput[q].name}</div>
+						<div>{heroesOutput[q].bio}</div>					
+					</div>
+				)
+			}
+			this.setState({heroes:h})
+		}
 	}
-	
+	//преобразуем данные
+	static getDerivedStateFromProps(props,state){
+		let newsOutput=[];
+		let heroesOutput=[];
+		if(props.reducer.news.isLoaded===true){
+			for(let j=0;j<props.reducer.news.data.appnews.newsitems.length;j++){
+				newsOutput.push(
+					<div key={j}>
+						<div>{props.reducer.news.data.appnews.newsitems[j].title}</div>
+						
+						<div dangerouslySetInnerHTML={{__html: props.reducer.news.data.appnews.newsitems[j].contents}} />
+					
+					</div>
+				)
+			}
+		}
+		
+		if(props.reducer.heroes.isLoaded===true&&props.reducer.abilities.isLoaded===true){
+			let keys=[];
+			for (let n in props.reducer.heroes.data) {
+				//console.log(n);
+				keys.push(n);
+			}
+			for(let p=0;p<keys.length;p++){
+				heroesOutput.push(props.reducer.heroes.data[keys[p]]);
+				// heroesOutput.push(
+				// 	<div key={j}>
+				// 		<div>{props.reducer.news.data.appnews.newsitems[j].title}</div>
+						
+				// 		<div dangerouslySetInnerHTML={{__html: props.reducer.news.data.appnews.newsitems[j].contents}} />
+					
+				// 	</div>
+				// )
+			}
+		}
+		/*
+		if(props.reducer.news.isLoaded===true){
+			for(let j=0;j<props.reducer.news.data.appnews.newsitems.length;j++){
+				newsOutput.push(
+					<div key={j}>
+						<div>{props.reducer.news.data.appnews.newsitems[j].title}</div>
+						
+						<div dangerouslySetInnerHTML={{__html: props.reducer.news.data.appnews.newsitems[j].contents}} />
+					
+					</div>
+				)
+			}
+		}
+		*/
+		return {
+			newsOutput: newsOutput,
+			heroesOutput: heroesOutput,
+		}
+	}
   	render() {
 		let counter = -500;
-		let {renderContent,contentSwitch,state:{render,newsOutput},props:{reducer}} = this;
-		console.log("newsOutput",newsOutput);
-		
+		let {renderContent,contentSwitch,state:{render,heroes},props:{reducer}} = this;
+	
+		this.mainFilter();
 		return (
 			<div className={"Block_Filter"}>
 				<div className="top-logo"><img src="img/Logo2.png"/></div>
@@ -260,10 +284,19 @@ class Block_Filter extends React.PureComponent {
 				<div className="filter">
 				{this.renderFilter(render,reducer)}</div>
 				<div className="content">
-				<button onClick={this.chn}>change state</button>
-					{render==="n"?
+					{/* {render==="n"?
 						(
 								this.state.newsOutput.map((item,i)=>{
+									counter+=500;
+									
+									return <FilterBlock clearTime counter={counter} key={i}>{item}</FilterBlock>
+								})
+							
+						)
+					:null} */}
+					{render==="h"?
+						(
+								this.state.heroes.map((item,i)=>{
 									counter+=500;
 									
 									return <FilterBlock clearTime counter={counter} key={i}>{item}</FilterBlock>

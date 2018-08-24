@@ -81,9 +81,6 @@ export const loadHeroes = () => async (dispatch, getState) => {
 		console.log('error', e);
 	}
 	
-	
-	
-
 	//abilities load
 	let answer2;
 	try {
@@ -95,7 +92,7 @@ export const loadHeroes = () => async (dispatch, getState) => {
 		console.log('error', e);
 	}
 
-
+	
 	if(answer2===undefined){
 		setTimeout(() => {
 			dispatch({
@@ -115,7 +112,6 @@ export const loadHeroes = () => async (dispatch, getState) => {
 		});
 	}
 	
-	//загружаем героев только когда загрузились абилки
 	if(answer===undefined){
 		setTimeout(() => {
 			dispatch({
@@ -133,11 +129,6 @@ export const loadHeroes = () => async (dispatch, getState) => {
 				})
 			  }, 2000)
 		});
-	}
-	
-	
-	if(answer&&answer2){
-		console.log(321);
 	}
 	
 };
