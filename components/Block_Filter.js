@@ -16,9 +16,7 @@ class Block_Filter extends React.PureComponent {
 		render: "", //l-loading, n-news, h-heroes, i-items
 		newsOutput: [], //полный массив данных
 		heroesOutput: [],
-
-		news:[], //отсортированный массив
-		heroes:[],
+		itemsOutput: [],
 	};
 
 	run = async () => {
@@ -197,8 +195,22 @@ class Block_Filter extends React.PureComponent {
 		</Fragment>
 	}
 	//фильтруем контент в зависимости от настроек
+	//пушим только те настройки которые соответсвуют фильтру
 	mainFilter=()=>{
-		let {state:{heroesOutput,render}} = this;
+		let {state:{newsOutput,heroesOutput,itemsOutput,render}} = this;
+		if(render==="n"){
+			let n=[];
+			for(let q=0;q<newsOutput.length;q++){
+				//console.log(newsOutput[q]);
+				n.push(
+					<div key={q}>
+						<div>{newsOutput[q].title}</div>
+						<div dangerouslySetInnerHTML={{__html: newsOutput[q].contents}} />
+					</div>
+				)
+			}
+			return n;
+		}
 		if(render==="h"){
 			let h=[];
 			for(let q=0;q<heroesOutput.length;q++){
@@ -210,68 +222,89 @@ class Block_Filter extends React.PureComponent {
 					</div>
 				)
 			}
-			this.setState({heroes:h})
+			return h;
 		}
+		if(render==="i"){
+			let i=[];
+			for(let q=0;q<itemsOutput.length;q++){
+				console.log(itemsOutput[q]);
+				if(
+					itemsOutput[q].dname==="DOTA_Tooltip_Ability_item_pocket_roshan"||
+					itemsOutput[q].dname==="DOTA_Tooltip_Ability_item_pocket_tower"||
+					itemsOutput[q].dname==="DOTA_Tooltip_Ability_item_super_blink"||
+					itemsOutput[q].dname==="DOTA_Tooltip_Ability_item_mutation_tombstone"||
+					itemsOutput[q].dname==="River Vial: Blood"||
+					itemsOutput[q].dname==="River Vial: Potion"||
+					itemsOutput[q].dname==="River Vial: Electrified"||
+					itemsOutput[q].dname==="River Vial: Oil"||
+					itemsOutput[q].dname==="River Vial: Slime"||
+					itemsOutput[q].dname==="River Vial: Dry"||
+					itemsOutput[q].dname==="River Vial: Chrome"||
+					itemsOutput[q].dname==="Recipe: Iron Talon1"||
+					itemsOutput[q].dname==="Iron Talon"
+				){
+
+					continue;
+				}
+				i.push(
+					<div key={q}>
+						<div>{itemsOutput[q].dname}</div>
+						<div><img src={"http://cdn.dota2.com/apps/dota2/images/items/"+itemsOutput[q].img}/></div>
+						<div dangerouslySetInnerHTML={{__html: itemsOutput[q].attrib}} />
+						<div>{itemsOutput[q].cost}</div>
+					</div>
+				)
+			}
+			return i;
+		}
+
 	}
 	//преобразуем данные
 	static getDerivedStateFromProps(props,state){
 		let newsOutput=[];
 		let heroesOutput=[];
+		let itemsOutput=[];
 		if(props.reducer.news.isLoaded===true){
 			for(let j=0;j<props.reducer.news.data.appnews.newsitems.length;j++){
-				newsOutput.push(
-					<div key={j}>
-						<div>{props.reducer.news.data.appnews.newsitems[j].title}</div>
-						
-						<div dangerouslySetInnerHTML={{__html: props.reducer.news.data.appnews.newsitems[j].contents}} />
-					
-					</div>
-				)
+				newsOutput.push(props.reducer.news.data.appnews.newsitems[j])
 			}
 		}
 		
 		if(props.reducer.heroes.isLoaded===true&&props.reducer.abilities.isLoaded===true){
 			let keys=[];
 			for (let n in props.reducer.heroes.data) {
-				//console.log(n);
 				keys.push(n);
 			}
 			for(let p=0;p<keys.length;p++){
 				heroesOutput.push(props.reducer.heroes.data[keys[p]]);
-				// heroesOutput.push(
-				// 	<div key={j}>
-				// 		<div>{props.reducer.news.data.appnews.newsitems[j].title}</div>
-						
-				// 		<div dangerouslySetInnerHTML={{__html: props.reducer.news.data.appnews.newsitems[j].contents}} />
-					
-				// 	</div>
-				// )
 			}
 		}
-		/*
-		if(props.reducer.news.isLoaded===true){
-			for(let j=0;j<props.reducer.news.data.appnews.newsitems.length;j++){
-				newsOutput.push(
-					<div key={j}>
-						<div>{props.reducer.news.data.appnews.newsitems[j].title}</div>
-						
-						<div dangerouslySetInnerHTML={{__html: props.reducer.news.data.appnews.newsitems[j].contents}} />
-					
-					</div>
-				)
+		
+		if(props.reducer.items.isLoaded===true){
+			let keys=[];
+			for (let n in props.reducer.items.data.itemdata) {
+				keys.push(n);
+			}
+			for(let p=0;p<keys.length;p++){
+				itemsOutput.push(props.reducer.items.data.itemdata[keys[p]]);
 			}
 		}
-		*/
+		
 		return {
 			newsOutput: newsOutput,
 			heroesOutput: heroesOutput,
+			itemsOutput: itemsOutput,
 		}
 	}
   	render() {
 		let counter = -500;
+		let minus = 500;
+		let delay = 1.8;
 		let {renderContent,contentSwitch,state:{render,heroes},props:{reducer}} = this;
-	
-		this.mainFilter();
+		
+		let n = this.mainFilter();
+		let h = this.mainFilter();
+		let i = this.mainFilter();
 		return (
 			<div className={"Block_Filter"}>
 				<div className="top-logo"><img src="img/Logo2.png"/></div>
@@ -284,22 +317,35 @@ class Block_Filter extends React.PureComponent {
 				<div className="filter">
 				{this.renderFilter(render,reducer)}</div>
 				<div className="content">
-					{/* {render==="n"?
+					{render==="n"?
 						(
-								this.state.newsOutput.map((item,i)=>{
-									counter+=500;
-									
-									return <FilterBlock clearTime counter={counter} key={i}>{item}</FilterBlock>
+								n.map((item,i)=>{
+									counter=counter+minus;
+									minus=minus/1.1;
+									delay=delay/1.1;
+									return <FilterBlock delay={delay} counter={counter} key={i}>{item}</FilterBlock>
 								})
 							
 						)
-					:null} */}
+					:null}
 					{render==="h"?
 						(
-								this.state.heroes.map((item,i)=>{
-									counter+=500;
-									
-									return <FilterBlock clearTime counter={counter} key={i}>{item}</FilterBlock>
+								h.map((item,i)=>{
+									counter=counter+minus;
+									minus=minus/1.1;
+									delay=delay/1.1;
+									return <FilterBlock delay={delay}  counter={counter} key={i}>{item}</FilterBlock>
+								})
+							
+						)
+					:null}
+					{render==="i"?
+						(
+								i.map((item,i)=>{
+									counter=counter+minus;
+									minus=minus/1.1;
+									delay=delay/1.1;
+									return <FilterBlock delay={delay}  counter={counter} key={i}>{item}</FilterBlock>
 								})
 							
 						)

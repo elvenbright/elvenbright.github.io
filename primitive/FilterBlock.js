@@ -30,9 +30,9 @@ class FilterBlock extends React.PureComponent {
     }
 
     render(){
-
+        console.log(this.props.counter);
         return (   
-            <div className={this.props.forceHide?this.state.isVisible:"FilterBlock"}><div className={this.state.css}>
+            <div className={this.props.forceHide?this.state.isVisible:"FilterBlock"}><div className={this.state.css} style={this.state.css==="blockFilter blockAnim"?{animation: "pulse "+this.props.delay+"s"}:null}>
                 <div className="blockContent">{this.props.children}</div>
                 </div>
             </div>)
