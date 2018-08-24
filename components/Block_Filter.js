@@ -214,10 +214,11 @@ class Block_Filter extends React.PureComponent {
 		if(render==="h"){
 			let h=[];
 			for(let q=0;q<heroesOutput.length;q++){
-				//console.log(heroesOutput[q]);
+				console.log(heroesOutput[q].name);
 				h.push(
 					<div key={q}>
 						<div>{heroesOutput[q].name}</div>
+						<div><img src={"../img/heroes/"+heroesOutput[q].name+".png"}/></div>
 						<div>{heroesOutput[q].bio}</div>					
 					</div>
 				)
@@ -227,7 +228,6 @@ class Block_Filter extends React.PureComponent {
 		if(render==="i"){
 			let i=[];
 			for(let q=0;q<itemsOutput.length;q++){
-				console.log(itemsOutput[q]);
 				if(
 					itemsOutput[q].dname==="DOTA_Tooltip_Ability_item_pocket_roshan"||
 					itemsOutput[q].dname==="DOTA_Tooltip_Ability_item_pocket_tower"||
@@ -241,7 +241,14 @@ class Block_Filter extends React.PureComponent {
 					itemsOutput[q].dname==="River Vial: Dry"||
 					itemsOutput[q].dname==="River Vial: Chrome"||
 					itemsOutput[q].dname==="Recipe: Iron Talon1"||
-					itemsOutput[q].dname==="Iron Talon"
+					itemsOutput[q].dname==="Iron Talon"||
+					itemsOutput[q].dname==="Observer and Sentry Wards"||
+					itemsOutput[q].dname==="Tango (Shared)"||
+					itemsOutput[q].dname==="Cheese"||
+					itemsOutput[q].dname==="Aegis of the Immortal"||
+					itemsOutput[q].dname==="DOTA_Tooltip_Ability_item_trident"||
+					itemsOutput[q].dname==="DOTA_Tooltip_Ability_item_combo_breaker"||
+					itemsOutput[q].dname==="Refresher Shard"
 				){
 
 					continue;
@@ -249,7 +256,7 @@ class Block_Filter extends React.PureComponent {
 				i.push(
 					<div key={q}>
 						<div>{itemsOutput[q].dname}</div>
-						<div><img src={"http://cdn.dota2.com/apps/dota2/images/items/"+itemsOutput[q].img}/></div>
+						<div><img src={"../img/items/"+itemsOutput[q].img.slice(0, -2)}/></div>
 						<div dangerouslySetInnerHTML={{__html: itemsOutput[q].attrib}} />
 						<div>{itemsOutput[q].cost}</div>
 					</div>
