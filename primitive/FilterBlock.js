@@ -11,10 +11,19 @@ class FilterBlock extends React.PureComponent {
     }
 
     timer = null;
-   
+
+	//warning fix
+	componentDidMount() { 
+		this._ismounted = true;
+	  }
+	  
+	
+	
     animationStart =()=>{
         this.timer = setTimeout(() => {
-			this.setState({css:"blockFilter blockAnim"})
+			if(this._ismounted){
+				this.setState({css:"blockFilter blockAnim"})
+			}
 		  }, this.props.counter)
     }
 
@@ -37,7 +46,8 @@ class FilterBlock extends React.PureComponent {
             </div>)
     }
     componentWillUnmount(){
-        clearTimeout(this.timer);
+		clearTimeout(this.timer);
+		this._ismounted = false;
     }
 
 }

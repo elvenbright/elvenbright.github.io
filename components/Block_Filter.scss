@@ -7,6 +7,9 @@
 		padding: 90px;
 		>img{
 			width: 100%;
+			max-width: 700px;
+			margin: 0 auto;
+			display: block;
 		}
 	}
 	.menu-block{
@@ -24,7 +27,7 @@
 		
 	}
 	.filter{
-		border: 1px dashed #444;
+		border-top: 1px solid rgb(221, 220, 220);
 		min-height: 70px;
 		position: relative;
 		color:	white;
@@ -48,6 +51,7 @@
 		}
 		.spinner{
 			position: absolute;
+			margin-top: 15px; 
 			left: 50%;
 			&LoadIn{
 				animation: loadin 2s;

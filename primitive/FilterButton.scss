@@ -1,0 +1,12 @@
+@import "../core/main";
+
+.FilterButton{
+   .frame{
+	   display: flex;
+	   font-weight: 600;
+	   justify-content: space-around;
+	   .btn-small{
+			margin-top: 20px;
+	   }
+   }
+}

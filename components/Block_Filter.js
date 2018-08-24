@@ -6,7 +6,8 @@ import {Spiner} from '../primitive/Spiner';
 import {connect} from "react-redux";
 import {loadNews,loadHeroes,loadItems} from "../redux/AC";
 import FilterBlock from "../primitive/FilterBlock"
-
+import FilterButton from "../primitive/FilterButton"
+import { createClient } from 'http';
 
 
 
@@ -14,10 +15,24 @@ class Block_Filter extends React.PureComponent {
 	
 	state = {
 		render: "", //l-loading, n-news, h-heroes, i-items
+
 		newsOutput: [], //полный массив данных
 		heroesOutput: [],
 		itemsOutput: [],
+
+		selectedBtn2level: "",
+
+		//filter news
+		News1: false,
+		News2: false,
+
 	};
+
+	forceState = {
+		isBlockMathRand: false,
+		btnClickedType: "",
+	
+	}
 
 	run = async () => {
 		console.log('123s');
@@ -71,6 +86,8 @@ class Block_Filter extends React.PureComponent {
 				this.props.loadNews();
 			}
 			this.setState({render:"n"});
+			this.forceState.isBlockMathRand=false;
+			
 		}
 		//heroes
 		if(e==="h"){
@@ -78,6 +95,8 @@ class Block_Filter extends React.PureComponent {
 				this.props.loadHeroes();
 			}
 			this.setState({render:"h"});
+			this.forceState.isBlockMathRand=false;
+		
 		}
 		//items
 		if(e==="i"){
@@ -85,14 +104,16 @@ class Block_Filter extends React.PureComponent {
 				this.props.loadItems();
 			}
 			this.setState({render:"i"});
+			this.forceState.isBlockMathRand=false;
+	
 		}
 	};
+	
 	renderContent = () => {
 		let {state:{render},props:{reducer}} = this;
 		if(render==="n"){	
 			if(reducer.news.isLoaded===true){
 				let output = [];
-				
 				for(let j=0;j<reducer.news.data.appnews.newsitems.length;j++){
 					output.push(
 						<div key={j}>
@@ -103,7 +124,6 @@ class Block_Filter extends React.PureComponent {
 						</div>
 					)
 				}
-				this.setState({filterCont: output}) ;
 			}
 			
 		}
@@ -128,15 +148,17 @@ class Block_Filter extends React.PureComponent {
 			return <div></div>
 		}
 	};
+
 	//рендер панели фильтр
 	renderFilter = (i,r)=>{
 		//console.log(r); reducer r.news r.items r.heroes
 		
 		let menu = null; //возвращаем наполнение
+		let isInMenu = false;
 		
 		let spinStatus = "spinner spinnerNot";
 		let menuStatus = "menu menuLoadIn";
-
+		
 		//news
 		if(i==="n"){
 			if(r.news.loading===true){
@@ -148,10 +170,18 @@ class Block_Filter extends React.PureComponent {
 
 			}
 			else if(r.news.isLoaded===true){
+				this.forceState.btnClickedType="n";
 				spinStatus = "spinner spinnerLoadOut";
 				menuStatus = "menu menuLoadIn";
 
-				menu = <div>Menu Filter News</div>
+				menu = <FilterButton status={"n"}
+					btn1={()=>{ 
+						this.forceState.isBlockMathRand=true;
+						this.filter("News1")}} 
+					btn2={()=>{ 
+						this.forceState.isBlockMathRand=true;
+						this.filter("News2")}}
+					/>
 			}
 		}
 		//heroes
@@ -188,20 +218,43 @@ class Block_Filter extends React.PureComponent {
 				menu = <div>Menu Filter Items</div>
 			}
 		}
-		
+	
 		return <Fragment>
 			<div className={spinStatus}><Spiner/></div>
-			<div key={Math.random()}  className={menuStatus}>{menu}</div>
+			{
+				this.forceState.isBlockMathRand||this.forceState.btnClickedType===this.state.render?<div className={menuStatus}>{menu}</div>:<div key={Math.random()}  className={menuStatus}>{menu}</div>
+			}
 		</Fragment>
+	}
+	//сам фильтр
+	//Управление
+	filter = (e) =>{
+		if(e==="News1"){
+			this.setState({
+				News1: true,
+				News2: false,
+			})
+		}
+		if(e==="News2"){
+			this.setState({
+				News1: false,
+				News2: true,
+			})
+		}
+		
 	}
 	//фильтруем контент в зависимости от настроек
 	//пушим только те настройки которые соответсвуют фильтру
+	//ФИЛЬТРУЕМ ЗДЕСЬ!
 	mainFilter=()=>{
-		let {state:{newsOutput,heroesOutput,itemsOutput,render}} = this;
+		let {state:{newsOutput,heroesOutput,itemsOutput,render,News1}} = this;
 		if(render==="n"){
 			let n=[];
 			for(let q=0;q<newsOutput.length;q++){
-				//console.log(newsOutput[q]);
+				if(News1&&q>0){
+					continue
+				}
+				
 				n.push(
 					<div key={q}>
 						<div>{newsOutput[q].title}</div>
@@ -214,7 +267,6 @@ class Block_Filter extends React.PureComponent {
 		if(render==="h"){
 			let h=[];
 			for(let q=0;q<heroesOutput.length;q++){
-				console.log(heroesOutput[q].name);
 				h.push(
 					<div key={q}>
 						<div>{heroesOutput[q].name}</div>
@@ -315,11 +367,11 @@ class Block_Filter extends React.PureComponent {
 		return (
 			<div className={"Block_Filter"}>
 				<div className="top-logo"><img src="img/Logo2.png"/></div>
-				<hr/>
+				{/* <hr/> */}
 				<div className="menu-block">
-					<div onClick={()=>contentSwitch("n")} className="btn">News</div>
-					<div onClick={()=>contentSwitch("h")} className="btn">Heroes</div>
-					<div onClick={()=>contentSwitch("i")} className="btn">Items</div>
+					<div onClick={()=>contentSwitch("n")} className={render==="n"?"btn btnSelected":"btn"}>News</div>
+					<div onClick={()=>contentSwitch("h")} className={render==="h"?"btn btnSelected":"btn"}>Heroes</div>
+					<div onClick={()=>contentSwitch("i")} className={render==="i"?"btn btnSelected":"btn"}>Items</div>
 				</div>
 				<div className="filter">
 				{this.renderFilter(render,reducer)}</div>
