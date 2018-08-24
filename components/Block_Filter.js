@@ -1,11 +1,11 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import RTG from 'react-addons-css-transition-group';
 import {default as isoFetch} from 'isomorphic-fetch';
 import './Block_Filter.scss';
 import {Spiner} from '../primitive/Spiner';
 import {connect} from "react-redux";
 import {loadNews,loadHeroes,loadItems} from "../redux/AC";
+import FilterBlock from "../primitive/FilterBlock"
 
 
 
@@ -13,9 +13,10 @@ class Block_Filter extends React.PureComponent {
 	
 	state = {
 		render: "", //l-loading, n-news, h-heroes, i-items
-		test: [1,2,3,4],
-		test1: false,
-		test2: false,
+
+		//delete
+		test: [3,2,1],
+
 	};
 	run = async () => {
 		console.log('123s');
@@ -65,21 +66,21 @@ class Block_Filter extends React.PureComponent {
 		let {props:{reducer}} = this;
 		//news
 		if(e==="n"){
-			if(!reducer.news.isLoaded){
+			if(!reducer.news.isLoaded&&!reducer.news.loading){
 				this.props.loadNews();
 			}
 			this.setState({render:"n"});
 		}
 		//heroes
 		if(e==="h"){
-			if(!reducer.heroes.isLoaded){
+			if(!reducer.heroes.isLoaded&&!reducer.heroes.loading){
 				this.props.loadHeroes();
 			}
 			this.setState({render:"h"});
 		}
 		//items
 		if(e==="i"){
-			if(!reducer.items.isLoaded){
+			if(!reducer.items.isLoaded&&!reducer.items.loading){
 				this.props.loadItems();
 			}
 			this.setState({render:"i"});
@@ -129,75 +130,56 @@ class Block_Filter extends React.PureComponent {
 			return <div></div>
 		}
 	};
-	
-	//render engine
-	some = () => {
-		this.setState({
-			test1:true,
-			test2:false,
-		});
+	renderFilter = (i,r)=>{
+		//console.log(r); reducer r.news r.items r.heroes
 
-	};
-	some2 = () => {
-		this.setState({
-			test1:false,
-			test2:true,
-		});
-	}
-	out = () => {
-		let n = []
-		for(let l=0;l<6;l++){
-			n.push(<div key={l} className="list-item" style={{"transitionDelay": `${ l * .05 }s` }}>{l}</div>)
+		//news
+		if(i==="n"){
+
 		}
-		return n;
-	};
+		//heroes
+		if(i==="h"){
+
+		}
+		//items
+		if(i==="i"){
+
+		}
+	}
+	//delete this
+	chn= ()=>{
+		this.setState({test: [1,2,3]})
+	}
+	
   	render() {
+		let counter = -500;
+	
 		let {renderContent,contentSwitch,state:{render},props:{reducer}} = this;
 		return (
 			<div className={"Block_Filter"}>
 				<div className="top-logo"><img src="img/Logo2.png"/></div>
-				<hr/>
+				{/* <hr/> */}
 				<div className="menu-block">
-					<div onClick={()=>contentSwitch("n")} className="btn">News</div>
-					<div onClick={()=>contentSwitch("h")} className="btn">Heroes</div>
-					<div onClick={()=>contentSwitch("i")} className="btn">Items</div>
+					<div onClick={()=>contentSwitch("n")} className="btn">nКарты</div>
+					<div onClick={()=>contentSwitch("h")} className="btn">hДепозиты</div>
+					<div onClick={()=>contentSwitch("i")} className="btn">iПродукты</div>
 				</div>
+				<div className="filter">{this.renderFilter(render,reducer)}</div>
 				<div className="content">
+				<button onClick={this.chn}>change state</button>
 					{render==="n"?
 						(reducer.news.isLoaded===false
-							?<div className="spinner"><Spiner/></div>
-							:<div>}>
-								{reducer.news.data.appnews.newsitems.map((item,i)=>{
-									return <div key={i} style={{border:"1px solid white",color:"white", fontFamily: 'Flower'}}>
-										<div>{item.title}</div>
-										{/* <div dangerouslySetInnerHTML={{__html: item.contents}} /> */}
-									</div>
+							?null
+							:<div>
+								{this.state.test.map((item,i)=>{
+									counter+=500;
+									
+									return <FilterBlock clearTime counter={counter} key={i}>{item}</FilterBlock>
 								})}
 							</div>
 						)
 					:null}
 				</div>
-			
-
-              <button onClick={this.some}>start</button><button onClick={this.some2}>change</button>
-			  <div>{this.state.test1&&<RTG transitionName="slide-up" 	transitionAppear={true}
-												transitionEnterTimeout={1000}
-												transitionLeaveTimeout={1000}
-			  									transitionAppearTimeout={1000}>
-                        {this.out()}
-			  </RTG>}
-			  {this.state.test2&&<RTG transitionName="slide-up" 	transitionAppear={true}
-												transitionEnterTimeout={1000}
-												transitionLeaveTimeout={1000}
-			  									transitionAppearTimeout={1000}>
-						{this.out()}
-			  </RTG>}
-			  
-			  </div>
-               
-            	
-				
-
 
 			</div>
 		);
@@ -206,7 +188,7 @@ class Block_Filter extends React.PureComponent {
 
 }
 
-//export default Block_Filter
+
 
 export default connect((state) => ({
 	reducer: state.reducer

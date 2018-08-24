@@ -8,7 +8,7 @@
 body {
 	font-family: 'Raleway';
 	line-height: 1.25;
-	background-color: black;
+	background-color: #777;
 }
 
 input{
@@ -16,7 +16,8 @@ input{
 }
 .btn{
 	cursor: pointer;
-	font-size: 1.5em;
+	//font-size: 1.5em;
+	font-size: 0.8em;
 	width: 180px;
 	text-align: center;
 	border: 1px solid white;
@@ -121,4 +122,4 @@ input{
 	100% {
 	  transform: rotate(360deg);
 	}
-  }
+}
