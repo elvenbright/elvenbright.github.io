@@ -71,26 +71,46 @@ export const loadHeroes = () => async (dispatch, getState) => {
         type: 'ABILITIES_LOADING'
 	});
 
-	let answer;
+	// let answer;
+	// try {
+		
+		
+	// } catch (e) {
+	// 	console.log('error', e);
+	// 	return;
+	// }
+
+	let answer = {};
+	let answer2  = {};
+
 	try {
 		answer = await fetch('https://cors-anywhere.herokuapp.com/http://www.dota2.com/jsfeed/heropickerdata?v=18874723138974056&l=english', {
 					method: 'GET',
 				});
-		
+		answer2 = await fetch('https://cors-anywhere.herokuapp.com/https://www.dota2.com/jsfeed/heropediadata?feeds=abilitydata&l=english', {
+			method: 'GET',
+		});
 	} catch (e) {
+		//диспчаем ошибку
 		console.log('error', e);
+		return;
 	}
 	
-	//abilities load
-	let answer2;
-	try {
-		answer2 = await fetch('https://cors-anywhere.herokuapp.com/https://www.dota2.com/jsfeed/heropediadata?feeds=abilitydata&l=english', {
-					method: 'GET',
-				});
+	// //abilities load
+	// let answer2;
+	// try {
 		
-	} catch (e) {
-		console.log('error', e);
-	}
+		
+	// } catch (e) {
+	// 	console.log('error', e);
+	// 	//
+	// 	return;
+	// }
+
+	setTimeout(() => dispatch({
+		type: '',
+		payload: '',
+	}), 2000);
 
 	
 	if(answer2===undefined){
@@ -102,6 +122,7 @@ export const loadHeroes = () => async (dispatch, getState) => {
 		  }, 2000)
 	}
 	else{
+		console.log(1);
 		answer2.json().then( data => {
 			setTimeout(() => {
 				dispatch({
@@ -121,6 +142,7 @@ export const loadHeroes = () => async (dispatch, getState) => {
 		  }, 2000)
 	}
 	else{
+		console.log(2);
 		answer.json().then( data => {
 			setTimeout(() => {
 				dispatch({
