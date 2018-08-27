@@ -42,6 +42,11 @@
 				opacity: 1;
 		}
 		.menu{
+			.frame{
+				display: flex;
+				font-weight: 600;
+				justify-content: space-around;
+			}
 			&LoadIn{
 				animation: loadin 2s;
 				opacity: 1;

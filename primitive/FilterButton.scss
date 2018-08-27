@@ -1,12 +1,13 @@
 @import "../core/main";
 
 .FilterButton{
-   .frame{
-	   display: flex;
-	   font-weight: 600;
-	   justify-content: space-around;
-	   .btn-small{
-			margin-top: 34px;
-	   }
-   }
+	.btn-small{
+		margin-top: 34px;
+		>svg{
+			vertical-align: top;
+			margin-left: 10px;
+			display: inline;
+		}
+	}
+   
 }

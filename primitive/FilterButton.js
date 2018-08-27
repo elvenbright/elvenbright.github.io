@@ -1,5 +1,6 @@
 import React from 'react';
 import './FilterButton.scss';
+import SvgArrow from "../svg/SvgArrow"
 
 
 
@@ -13,20 +14,17 @@ class FilterButton extends React.PureComponent {
 	}
 
 	renderContent = () =>{
-			let {props:{status},state:{atr}} = this;
-			if(status==="n"){
-				return(
-					<div className={"frame"}>
-						<div className={atr==="n1"?"btn-small btn-smallSelected":"btn-small"} data-atr={"n1"} onClick={(e)=>{ 
-								this.props.btn1();
-								this.run(e);}}>newest</div>
+			let {props:{name},state:{atr}} = this;
+		
+			return(
+				
+					<div className={atr==="n1"?"btn-small btn-smallSelected":"btn-small"} data-atr={"n1"} onClick={(e)=>{ 
+							this.props.btn1();
+							this.run(e);}}>{name}<SvgArrow/></div>
 
-						<div className={atr==="n2"?"btn-small btn-smallSelected":"btn-small"} data-atr={"n2"} onClick={(e)=>{ 
-								this.props.btn2();
-								this.run(e);}}>oldest</div>
-					</div>
-				)
-			}
+				
+			)
+			
 	}
   
     render(){

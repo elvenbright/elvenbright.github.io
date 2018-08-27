@@ -189,14 +189,14 @@ class Block_Filter extends React.PureComponent {
 				spinStatus = "spinner spinnerLoadOut";
 				menuStatus = "menu menuLoadIn";
 
-				menu = <FilterButton status={"n"}
-					btn1={()=>{ 
-						this.forceState.isBlockMathRand=true;
-						this.filter("News1")}} 
-					btn2={()=>{ 
-						this.forceState.isBlockMathRand=true;
-						this.filter("News2")}}
-					/>
+				menu = <div className="frame">
+						<FilterButton name="newest" btn1={()=>{ 
+							this.forceState.isBlockMathRand=true;
+							this.filter("News1")}} />
+						<FilterButton transform="rotate(90)" name="oldest" btn1={()=>{ 
+							this.forceState.isBlockMathRand=true;
+							this.filter("News2")}} />
+					</div>
 			}
 		}
 		//heroes
@@ -277,7 +277,6 @@ class Block_Filter extends React.PureComponent {
 			}
 			else if(News2){
 				for(let q=newsOutput.length-1;q>=0;q--){
-					console.log('123');
 					n.push(
 						<div key={q}>
 							<div>{newsOutput[q].title}</div>
@@ -399,7 +398,7 @@ class Block_Filter extends React.PureComponent {
 					<div onClick={()=>contentSwitch("i")} className={render==="i"?"btn btnSelected":"btn"}>Items</div>
 				</div>
 				<div className="filter"><span>sort by</span>
-				{this.renderFilter(render,reducer)}</div>
+					{this.renderFilter(render,reducer)}</div>
 				<div className="content">
 					{render==="n"?
 						(
