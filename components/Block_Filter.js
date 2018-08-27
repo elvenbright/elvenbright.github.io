@@ -76,7 +76,22 @@ class Block_Filter extends React.PureComponent {
 		.then(json => console.log(json))
 		*/
 	};
-	
+
+
+	//консоль лог сработает сразу
+	// abc = () => {
+	// 	fetch('/vk.com').then((res) => console.log(res))
+	// 	console.log('сразу');
+	// }	
+
+	//консоль лог сработает после ответа
+	// def = async () => {
+	// 	let abc = await fetch('/vk.com');
+	// 	abc.json().then( data => {
+	// 	console.log(data);
+	// 	});
+	// 	console.log('сработает не сразу',abc);
+	// }
 	
 	contentSwitch = (e) => {
 		let {props:{reducer}} = this;
