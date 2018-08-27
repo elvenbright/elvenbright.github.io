@@ -262,21 +262,31 @@ class Block_Filter extends React.PureComponent {
 	//пушим только те настройки которые соответсвуют фильтру
 	//ФИЛЬТРУЕМ ЗДЕСЬ!
 	mainFilter=()=>{
-		let {state:{newsOutput,heroesOutput,itemsOutput,render,News1}} = this;
+		let {state:{newsOutput,heroesOutput,itemsOutput,render,News1,News2}} = this;
 		if(render==="n"){
 			let n=[];
-			for(let q=0;q<newsOutput.length;q++){
-				if(News1&&q>0){
-					continue
+			if(News1){
+				for(let q=0;q<newsOutput.length;q++){
+					n.push(
+						<div key={q}>
+							<div>{newsOutput[q].title}</div>
+							<div dangerouslySetInnerHTML={{__html: newsOutput[q].contents}} />
+						</div>
+					)
 				}
-				
-				n.push(
-					<div key={q}>
-						<div>{newsOutput[q].title}</div>
-						<div dangerouslySetInnerHTML={{__html: newsOutput[q].contents}} />
-					</div>
-				)
 			}
+			else if(News2){
+				for(let q=newsOutput.length-1;q>=0;q--){
+					console.log('123');
+					n.push(
+						<div key={q}>
+							<div>{newsOutput[q].title}</div>
+							<div dangerouslySetInnerHTML={{__html: newsOutput[q].contents}} />
+						</div>
+					)
+				}
+			}
+			
 			return n;
 		}
 		if(render==="h"){
@@ -388,7 +398,7 @@ class Block_Filter extends React.PureComponent {
 					<div onClick={()=>contentSwitch("h")} className={render==="h"?"btn btnSelected":"btn"}>Heroes</div>
 					<div onClick={()=>contentSwitch("i")} className={render==="i"?"btn btnSelected":"btn"}>Items</div>
 				</div>
-				<div className="filter">
+				<div className="filter"><span>sort by</span>
 				{this.renderFilter(render,reducer)}</div>
 				<div className="content">
 					{render==="n"?

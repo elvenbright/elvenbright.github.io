@@ -19,11 +19,11 @@ class FilterButton extends React.PureComponent {
 					<div className={"frame"}>
 						<div className={atr==="n1"?"btn-small btn-smallSelected":"btn-small"} data-atr={"n1"} onClick={(e)=>{ 
 								this.props.btn1();
-								this.run(e);}}>show last 10</div>
+								this.run(e);}}>newest</div>
 
 						<div className={atr==="n2"?"btn-small btn-smallSelected":"btn-small"} data-atr={"n2"} onClick={(e)=>{ 
 								this.props.btn2();
-								this.run(e);}}>show all</div>
+								this.run(e);}}>oldest</div>
 					</div>
 				)
 			}

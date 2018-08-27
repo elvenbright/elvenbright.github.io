@@ -31,6 +31,12 @@
 		min-height: 70px;
 		position: relative;
 		color:	white;
+		>span{
+			position: absolute;
+			padding: 6px 0 0 27px;
+			content: "sort by";
+			font-family: 'Flower';
+		}
 		&On{
 			animation: loadin 2s;
 				opacity: 1;
