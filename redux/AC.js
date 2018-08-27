@@ -122,7 +122,6 @@ export const loadHeroes = () => async (dispatch, getState) => {
 		  }, 2000)
 	}
 	else{
-		console.log(1);
 		answer2.json().then( data => {
 			setTimeout(() => {
 				dispatch({
@@ -142,7 +141,6 @@ export const loadHeroes = () => async (dispatch, getState) => {
 		  }, 2000)
 	}
 	else{
-		console.log(2);
 		answer.json().then( data => {
 			setTimeout(() => {
 				dispatch({

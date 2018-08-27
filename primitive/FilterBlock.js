@@ -12,7 +12,10 @@ class FilterBlock extends React.PureComponent {
 
     timer = null;
 
-	//warning fix
+    //warning fix
+    //создаем переменную  при маунте
+    //удаляем её при анмаунте
+    //таким образом при проверке этой переменной можно узнать существует ли наш компонент
 	componentDidMount() { 
 		this._ismounted = true;
 	  }
@@ -21,6 +24,7 @@ class FilterBlock extends React.PureComponent {
 	
     animationStart =()=>{
         this.timer = setTimeout(() => {
+            //если компонет не существует не вызываем сетСтате
 			if(this._ismounted){
 				this.setState({css:"blockFilter blockAnim"})
 			}
