@@ -12,15 +12,23 @@ class FilterButton extends React.PureComponent {
 	run=(e)=>{
 		this.setState({atr: e.target.dataset.atr});
 	}
-
+	hover=()=>{
+		console.log('hi');
+	}
 	renderContent = () =>{
-			let {props:{name},state:{atr}} = this;
-		
+			let {props:{name,arrow},state:{atr}} = this;
+			let transform;
+			if(arrow==="up"){
+				transform="rotate(90)"
+			}
+			else if(arrow==="down"){
+				transform="rotate(270)"
+			}
 			return(
 				
 					<div className={atr==="n1"?"btn-small btn-smallSelected":"btn-small"} data-atr={"n1"} onClick={(e)=>{ 
 							this.props.btn1();
-							this.run(e);}}>{name}<SvgArrow/></div>
+							this.run(e);}}>{name}<SvgArrow className="btn-smallSelected" transform={transform}/></div>
 
 				
 			)

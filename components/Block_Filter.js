@@ -190,10 +190,10 @@ class Block_Filter extends React.PureComponent {
 				menuStatus = "menu menuLoadIn";
 
 				menu = <div className="frame">
-						<FilterButton name="newest" btn1={()=>{ 
+						<FilterButton arrow="down" name="newest" btn1={()=>{ 
 							this.forceState.isBlockMathRand=true;
 							this.filter("News1")}} />
-						<FilterButton transform="rotate(90)" name="oldest" btn1={()=>{ 
+						<FilterButton arrow="up" name="oldest" btn1={()=>{ 
 							this.forceState.isBlockMathRand=true;
 							this.filter("News2")}} />
 					</div>

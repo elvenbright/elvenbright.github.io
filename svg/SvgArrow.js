@@ -3,6 +3,7 @@ import React, {PureComponent} from 'react';
 export default class SvgArrow extends PureComponent {
 
     static defaultProps = {
+		className:			"",
         width:              '18px',
         height:             '18px',
         strokeWidth:        2,
@@ -15,7 +16,7 @@ export default class SvgArrow extends PureComponent {
     };
 
     render() {
-		console.log(this.props.transform);
+		console.log(this.props);
         return (
             <svg {...this.props}>
 				<path d="M36.07 20.18l-29-20A1 1 0 0 0 5.5 1v40a1 1 0 0 0 1.57.82l29-20a1 1 0 0 0 0-1.64zM7.5 39.09V2.9L33.74 21 7.5 39.1z"/>
