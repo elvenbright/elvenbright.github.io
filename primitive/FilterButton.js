@@ -3,43 +3,26 @@ import './FilterButton.scss';
 import SvgArrow from "../svg/SvgArrow"
 
 
-
-
 class FilterButton extends React.PureComponent {
-	state = {
-		atr: "",
-	}
-	run=(e)=>{
-		this.setState({atr: e.target.dataset.atr});
-	}
-	hover=()=>{
+	//props.name имя кнопки
+	//props.arrow("up") ("down") стрелка вверх вниз
+	run=()=>{
 		console.log('hi');
 	}
-	renderContent = () =>{
-			let {props:{name,arrow},state:{atr}} = this;
-			let transform;
-			if(arrow==="up"){
-				transform="rotate(90)"
-			}
-			else if(arrow==="down"){
-				transform="rotate(270)"
-			}
-			return(
-				
-					<div className={atr==="n1"?"btn-small btn-smallSelected":"btn-small"} data-atr={"n1"} onClick={(e)=>{ 
-							this.props.btn1();
-							this.run(e);}}>{name}<SvgArrow className="btn-smallSelected" transform={transform}/></div>
-
-				
-			)
-			
-	}
-  
     render(){
-        return (   
-            <div className={"FilterButton"}>
-				{this.renderContent()}
-            </div>)
+        let {props:{name,arrow,selected}} = this;
+		let transform;
+		if(selected){
+			transform="rotate(90)"
+		}
+		else{
+			transform="rotate(270)"
+		}
+
+		return(<div className={selected?"FilterButton FilterButtonSelected":"FilterButton"}><div className={selected?"Underline UnderlineSelected":"Underline"}></div>
+				<div className={selected?"filterBtn filterBtnSelected":"filterBtn"} onClick={(e)=>{ 
+						this.run(); this.props.btn1();}}>{name}<SvgArrow className={selected?"filterSvg filterSvgSelected":"filterSvg"} transform={transform}/></div>	
+		</div>)
     }
    
 

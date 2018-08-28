@@ -1,13 +1,11 @@
 import React ,{Fragment} from 'react';
 import { NavLink } from 'react-router-dom';
-import {default as isoFetch} from 'isomorphic-fetch';
 import './Block_Filter.scss';
 import {Spiner} from '../primitive/Spiner';
 import {connect} from "react-redux";
 import {loadNews,loadHeroes,loadItems} from "../redux/AC";
 import FilterBlock from "../primitive/FilterBlock"
 import FilterButton from "../primitive/FilterButton"
-import { createClient } from 'http';
 
 
 
@@ -25,6 +23,7 @@ class Block_Filter extends React.PureComponent {
 		//filter news
 		News1: false,
 		News2: false,
+		btns:[false,false]
 
 	};
 
@@ -190,12 +189,14 @@ class Block_Filter extends React.PureComponent {
 				menuStatus = "menu menuLoadIn";
 
 				menu = <div className="frame">
-						<FilterButton arrow="down" name="newest" btn1={()=>{ 
+						<FilterButton selected={this.state.btns[0]} name="newest" btn1={()=>{ 
 							this.forceState.isBlockMathRand=true;
-							this.filter("News1")}} />
-						<FilterButton arrow="up" name="oldest" btn1={()=>{ 
+							this.filter("News1")
+							this.btnStatus(0)}} />
+						<FilterButton selected={this.state.btns[1]} name="oldest" btn1={()=>{ 
 							this.forceState.isBlockMathRand=true;
-							this.filter("News2")}} />
+							this.filter("News2")
+							this.btnStatus(1)}} />
 					</div>
 			}
 		}
@@ -240,6 +241,19 @@ class Block_Filter extends React.PureComponent {
 				this.forceState.isBlockMathRand||this.forceState.btnClickedType===this.state.render?<div className={menuStatus}>{menu}</div>:<div key={Math.random()}  className={menuStatus}>{menu}</div>
 			}
 		</Fragment>
+	}
+	//кнопки фильтра (меняем цвет)
+	btnStatus=(e)=>{
+		let output=[];
+		for(let r=0;r<this.state.btns.length;r++){
+			if(e===r){
+				output.push(true)
+			}
+			else{
+				output.push(false)
+			}
+		}
+		this.setState({btns:output});
 	}
 	//сам фильтр
 	//Управление

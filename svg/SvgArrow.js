@@ -4,13 +4,13 @@ export default class SvgArrow extends PureComponent {
 
     static defaultProps = {
 		className:			"",
-        width:              '18px',
-        height:             '18px',
+        width:              '15px',
+        height:             '15px',
         strokeWidth:        2,
         // fillColor:          '#000',
         // fillColorInactive:  '#ff9700',
         // strokeColor:        '#000',
-        viewBox:            '0 0 40 40',
+        viewBox:            '0 0 45 40',
 		stroke: 'white',
 		transform : "rotate(270)",
     };
