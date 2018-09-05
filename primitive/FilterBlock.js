@@ -11,7 +11,6 @@ class FilterBlock extends React.PureComponent {
     }
 
     timer = null;
-
     //warning fix
     //создаем переменную  при маунте
     //удаляем её при анмаунте
