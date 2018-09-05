@@ -1,13 +1,11 @@
 import React ,{Fragment} from 'react';
 import { NavLink } from 'react-router-dom';
-import {default as isoFetch} from 'isomorphic-fetch';
 import './Block_Filter.scss';
 import {Spiner} from '../primitive/Spiner';
 import {connect} from "react-redux";
 import {loadNews,loadHeroes,loadItems} from "../redux/AC";
 import FilterBlock from "../primitive/FilterBlock"
 import FilterButton from "../primitive/FilterButton"
-import { createClient } from 'http';
 
 
 
@@ -25,6 +23,7 @@ class Block_Filter extends React.PureComponent {
 		//filter news
 		News1: false,
 		News2: false,
+		btns:[false,false]
 
 	};
 
@@ -189,14 +188,16 @@ class Block_Filter extends React.PureComponent {
 				spinStatus = "spinner spinnerLoadOut";
 				menuStatus = "menu menuLoadIn";
 
-				menu = <FilterButton status={"n"}
-					btn1={()=>{ 
-						this.forceState.isBlockMathRand=true;
-						this.filter("News1")}} 
-					btn2={()=>{ 
-						this.forceState.isBlockMathRand=true;
-						this.filter("News2")}}
-					/>
+				menu = <div className="frame">
+						<FilterButton selected={this.state.btns[0]} name="newest" btn1={()=>{ 
+							this.forceState.isBlockMathRand=true;
+							this.filter("News1")
+							this.btnStatus(0)}} />
+						<FilterButton selected={this.state.btns[1]} name="oldest" btn1={()=>{ 
+							this.forceState.isBlockMathRand=true;
+							this.filter("News2")
+							this.btnStatus(1)}} />
+					</div>
 			}
 		}
 		//heroes
@@ -241,6 +242,19 @@ class Block_Filter extends React.PureComponent {
 			}
 		</Fragment>
 	}
+	//кнопки фильтра (меняем цвет)
+	btnStatus=(e)=>{
+		let output=[];
+		for(let r=0;r<this.state.btns.length;r++){
+			if(e===r){
+				output.push(true)
+			}
+			else{
+				output.push(false)
+			}
+		}
+		this.setState({btns:output});
+	}
 	//сам фильтр
 	//Управление
 	filter = (e) =>{
@@ -262,21 +276,30 @@ class Block_Filter extends React.PureComponent {
 	//пушим только те настройки которые соответсвуют фильтру
 	//ФИЛЬТРУЕМ ЗДЕСЬ!
 	mainFilter=()=>{
-		let {state:{newsOutput,heroesOutput,itemsOutput,render,News1}} = this;
+		let {state:{newsOutput,heroesOutput,itemsOutput,render,News1,News2}} = this;
 		if(render==="n"){
 			let n=[];
-			for(let q=0;q<newsOutput.length;q++){
-				if(News1&&q>0){
-					continue
+			if(News1){
+				for(let q=0;q<newsOutput.length;q++){
+					n.push(
+						<div key={q}>
+							<div>{newsOutput[q].title}</div>
+							<div dangerouslySetInnerHTML={{__html: newsOutput[q].contents}} />
+						</div>
+					)
 				}
-				
-				n.push(
-					<div key={q}>
-						<div>{newsOutput[q].title}</div>
-						<div dangerouslySetInnerHTML={{__html: newsOutput[q].contents}} />
-					</div>
-				)
 			}
+			else if(News2){
+				for(let q=newsOutput.length-1;q>=0;q--){
+					n.push(
+						<div key={q}>
+							<div>{newsOutput[q].title}</div>
+							<div dangerouslySetInnerHTML={{__html: newsOutput[q].contents}} />
+						</div>
+					)
+				}
+			}
+			
 			return n;
 		}
 		if(render==="h"){
@@ -388,8 +411,8 @@ class Block_Filter extends React.PureComponent {
 					<div onClick={()=>contentSwitch("h")} className={render==="h"?"btn btnSelected":"btn"}>Heroes</div>
 					<div onClick={()=>contentSwitch("i")} className={render==="i"?"btn btnSelected":"btn"}>Items</div>
 				</div>
-				<div className="filter">
-				{this.renderFilter(render,reducer)}</div>
+				<div className="filter"><span>sort by</span>
+					{this.renderFilter(render,reducer)}</div>
 				<div className="content">
 					{render==="n"?
 						(

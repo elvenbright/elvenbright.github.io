@@ -61,7 +61,8 @@ export const loadNews = () => async (dispatch, getState) => {
 	*/	
 };
 
-
+//в асинхронной функции все работает по порядку
+//до тех пор пока  не отработает await дальше код не пойдет
 export const loadHeroes = () => async (dispatch, getState) => {
 	
 	dispatch({
@@ -70,15 +71,6 @@ export const loadHeroes = () => async (dispatch, getState) => {
 	dispatch({
         type: 'ABILITIES_LOADING'
 	});
-
-	// let answer;
-	// try {
-		
-		
-	// } catch (e) {
-	// 	console.log('error', e);
-	// 	return;
-	// }
 
 	let answer = {};
 	let answer2  = {};
@@ -93,25 +85,18 @@ export const loadHeroes = () => async (dispatch, getState) => {
 	} catch (e) {
 		//диспчаем ошибку
 		console.log('error', e);
+		//защита от продолжения
 		return;
 	}
 	
-	// //abilities load
-	// let answer2;
-	// try {
-		
-		
-	// } catch (e) {
-	// 	console.log('error', e);
-	// 	//
-	// 	return;
-	// }
 
+	/*
+	можно вызывать два type под одним имененм
 	setTimeout(() => dispatch({
 		type: '',
 		payload: '',
 	}), 2000);
-
+	*/
 	
 	if(answer2===undefined){
 		setTimeout(() => {

@@ -31,11 +31,24 @@
 		min-height: 70px;
 		position: relative;
 		color:	white;
+		>span{
+			position: absolute;
+			padding: 9px 0 0 27px;
+			content: "sort by";
+			font-family: 'Flower';
+			text-shadow:0 0 7px white ,0 0 7px white;
+		}
 		&On{
 			animation: loadin 2s;
 				opacity: 1;
 		}
 		.menu{
+			.frame{
+				margin-top: 34px;
+				display: flex;
+				font-weight: 600;
+				justify-content: space-around;
+			}
 			&LoadIn{
 				animation: loadin 2s;
 				opacity: 1;
