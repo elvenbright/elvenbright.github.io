@@ -9,9 +9,7 @@ class FilterBlock extends React.PureComponent {
     state={
         css: "blockFilterZero",
     }
-
     timer = null;
-
     //warning fix
     //создаем переменную  при маунте
     //удаляем её при анмаунте
