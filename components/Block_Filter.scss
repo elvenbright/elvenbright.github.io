@@ -26,6 +26,7 @@
 		color: white;
 		
 	}
+	
 	.filter{
 		border-top: 1px solid rgb(221, 220, 220);
 		min-height: 70px;
@@ -36,7 +37,9 @@
 			padding: 9px 0 0 27px;
 			content: "sort by";
 			font-family: 'Flower';
-			text-shadow:0 0 7px white ,0 0 7px white;
+		}
+		.clicked{
+			text-shadow:0 0 10px white ,0 0 10px white;
 		}
 		&On{
 			animation: loadin 2s;

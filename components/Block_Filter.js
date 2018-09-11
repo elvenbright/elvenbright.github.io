@@ -6,6 +6,8 @@ import {connect} from "react-redux";
 import {loadNews,loadHeroes,loadItems} from "../redux/AC";
 import FilterBlock from "../primitive/FilterBlock"
 import FilterButton from "../primitive/FilterButton"
+import itemsVerify from "../jsonBackUp/itemsVerify";
+import heroesVerify from "../jsonBackUp/heroesVerify";
 
 
 
@@ -94,6 +96,9 @@ class Block_Filter extends React.PureComponent {
 	
 	contentSwitch = (e) => {
 		let {props:{reducer}} = this;
+
+		//включаем подсветку
+		this.setState({clicked:true});
 		//news
 		if(e==="n"){
 			if(!reducer.news.isLoaded&&!reducer.news.loading){
@@ -305,52 +310,31 @@ class Block_Filter extends React.PureComponent {
 		if(render==="h"){
 			let h=[];
 			for(let q=0;q<heroesOutput.length;q++){
-				h.push(
-					<div key={q}>
-						<div>{heroesOutput[q].name}</div>
-						<div><img src={"../img/heroes/"+heroesOutput[q].name+".png"}/></div>
-						<div>{heroesOutput[q].bio}</div>					
-					</div>
-				)
+				if(heroesVerify.indexOf(heroesOutput[q].name)!==-1){
+					h.push(
+						<div key={q}>
+							<div>{heroesOutput[q].name}</div>
+							<div><img src={"../img/heroes/"+heroesOutput[q].name+".png"}/></div>
+							<div>{heroesOutput[q].bio}</div>					
+						</div>
+					)
+				}
 			}
 			return h;
 		}
 		if(render==="i"){
 			let i=[];
 			for(let q=0;q<itemsOutput.length;q++){
-				if(
-					itemsOutput[q].dname==="DOTA_Tooltip_Ability_item_pocket_roshan"||
-					itemsOutput[q].dname==="DOTA_Tooltip_Ability_item_pocket_tower"||
-					itemsOutput[q].dname==="DOTA_Tooltip_Ability_item_super_blink"||
-					itemsOutput[q].dname==="DOTA_Tooltip_Ability_item_mutation_tombstone"||
-					itemsOutput[q].dname==="River Vial: Blood"||
-					itemsOutput[q].dname==="River Vial: Potion"||
-					itemsOutput[q].dname==="River Vial: Electrified"||
-					itemsOutput[q].dname==="River Vial: Oil"||
-					itemsOutput[q].dname==="River Vial: Slime"||
-					itemsOutput[q].dname==="River Vial: Dry"||
-					itemsOutput[q].dname==="River Vial: Chrome"||
-					itemsOutput[q].dname==="Recipe: Iron Talon1"||
-					itemsOutput[q].dname==="Iron Talon"||
-					itemsOutput[q].dname==="Observer and Sentry Wards"||
-					itemsOutput[q].dname==="Tango (Shared)"||
-					itemsOutput[q].dname==="Cheese"||
-					itemsOutput[q].dname==="Aegis of the Immortal"||
-					itemsOutput[q].dname==="DOTA_Tooltip_Ability_item_trident"||
-					itemsOutput[q].dname==="DOTA_Tooltip_Ability_item_combo_breaker"||
-					itemsOutput[q].dname==="Refresher Shard"
-				){
-
-					continue;
+				if(itemsVerify.indexOf(itemsOutput[q].dname)!==-1){
+					i.push(
+						<div key={q}>
+							<div>{itemsOutput[q].dname}</div>
+							<div><img src={"../img/items/"+itemsOutput[q].img.slice(0, -2)}/></div>
+							<div dangerouslySetInnerHTML={{__html: itemsOutput[q].attrib}} />
+							<div>{itemsOutput[q].cost}</div>
+						</div>
+					)
 				}
-				i.push(
-					<div key={q}>
-						<div>{itemsOutput[q].dname}</div>
-						<div><img src={"../img/items/"+itemsOutput[q].img.slice(0, -2)}/></div>
-						<div dangerouslySetInnerHTML={{__html: itemsOutput[q].attrib}} />
-						<div>{itemsOutput[q].cost}</div>
-					</div>
-				)
 			}
 			return i;
 		}
@@ -411,7 +395,7 @@ class Block_Filter extends React.PureComponent {
 					<div onClick={()=>contentSwitch("h")} className={render==="h"?"btn btnSelected":"btn"}>Heroes</div>
 					<div onClick={()=>contentSwitch("i")} className={render==="i"?"btn btnSelected":"btn"}>Items</div>
 				</div>
-				<div className="filter"><span>sort by</span>
+				<div className="filter"><span className={this.state.clicked?"clicked":""}>sort by</span>
 					{this.renderFilter(render,reducer)}</div>
 				<div className="content">
 					{render==="n"?
