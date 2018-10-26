@@ -1,13 +1,47 @@
 ﻿<!DOCTYPE html> 
-<html> 
+<html onclick="run()" class="col1"> 
 <head> 
   <meta charset="utf-8" />
   <title></title>
-  <link rel="stylesheet" type="text/css" href="bundle.css">
-  <link rel="stylesheet" href="/fonts/fonts.css"/>
+  <style>
+	.col1{
+		background-color: #ecf;
+	}
+	.col2{
+		background-color: black;
+	}
+	.col3{
+		background-color: white;
+	}
+	.col4{
+		background-color: red;
+	}
+	.col5{
+		background-color: green;
+	}
+	.col6{
+		background-color: blue;
+	}
+  </style>
 </head> 
 <body> 
-  <div id="container"></div> 
-  <script src="bundle.js"></script>
+  <script>
+	function run(){
+		
+		console.log(parseInt(document.getElementsByTagName("html")[0].className[3]));
+		//document.getElementsByTagName("html")[0].className='col2';
+		
+		if(parseInt(document.getElementsByTagName("html")[0].className[3])<6){
+		console.log(parseInt(document.getElementsByTagName("html")[0].className[3]));
+			console.log('case1');
+			console.log(parseInt(document.getElementsByTagName("html")[0].className[3]));
+			document.getElementsByTagName("html")[0].className='col'+((parseInt(document.getElementsByTagName("html")[0].className[3]))+1);
+		}
+		else{
+			console.log('case2');
+			document.getElementsByTagName("html")[0].className='col1';
+		}
+	}
+  </script>
 </body> 
 </html>
