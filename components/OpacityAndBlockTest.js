@@ -5,7 +5,7 @@ import React from 'react';
 
 class OpacityAndBlockTest extends React.PureComponent {
 	state = {
-		defaultText: 'some long text some long text some long text some long text some long text some long text some long text'
+		defaultText: 'какой-то там текст какой-то там текст какой-то там текст какой-то там текст какой-то там текст какой-то там текст какой-то там текст'
 	}
 	ref = React.createRef();
 
@@ -50,7 +50,7 @@ class OpacityAndBlockTest extends React.PureComponent {
 		if(font){
 			return (
 				<div>
-					<div>{font}</div>
+					<div>{'шрифт - '+font}</div>
 					<div><span style={{fontFamily:font, border: "1px solid gray"}}>font Ie Test</span></div>
 					<div style={{fontFamily:font, lineHeight:'1em',maxHeight:'1em',wordBreak:'break-all'}} ref={this.ref} className={"Block_Opacity"}></div>
 					<hr/><br/>
@@ -60,7 +60,7 @@ class OpacityAndBlockTest extends React.PureComponent {
 		else{
 			return (
 				<div>
-					<div>{'дэфолтный шрифт antd'}</div>
+					<div>{'шрифт - дэфолтный шрифт antd'}</div>
 					<div><span style={{border: "1px solid gray"}}>font Ie Test</span></div>
 					<div style={{lineHeight:'1em',maxHeight:'1em',wordBreak:'break-all'}} ref={this.ref} className={"Block_Opacity"}></div>
 					<hr/><br/>

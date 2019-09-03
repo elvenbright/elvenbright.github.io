@@ -16,3 +16,9 @@
 	src: url('openSans.woff');
 	font-style: normal;
 }
+
+@font-face {
+	font-family: 'roboto';
+	src: url('roboto/Roboto-Regular.ttf');
+	font-style: normal;
+}

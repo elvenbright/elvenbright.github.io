@@ -13,28 +13,36 @@ class Block_MainPage extends React.PureComponent {
 	render() {
 		return (
 			<div>
-                <div><Icon type="exclamation" /><b>Readme: (тестировать на windows - chrome)</b></div>
+                <div><Icon type="exclamation" /><b>Readme: (тестировать на windows - chrome/ на маке работало корректно)</b></div>
                 <div>1 - маленький шрифт должен идти по низу блока + от от большой буквы должен идти отсуп как от низа</div>
                 <div>2 - должна работать opacity при узком экране(сразу поставить узкуий экран и перезаргузить - текст не должен вылазить)</div>
                 
                 <hr/><br/>
 
-                <div>(<span style={{color:'green'}}>1 - в блоке нормально</span>,<span style={{color:'green'}}>2 - opacity - хорошо</span> )</div>
-
+                <div><span style={{color:'green'}}>1 - в блоке нормально</span></div>
+                <div><span style={{color:'green'}}>2 - opacity - хорошо</span></div>
                 <OpacityAndBlockTest font="Courier New"/>
 
-                <div>(<span style={{color:'green'}}>1 - в блоке нормально</span>,<span style={{color:'red'}}>2 - opacity при перовом рендере работает некорректно</span> )</div>
+                <div><span style={{color:'green'}}>1 - в блоке нормально</span></div>
+                <div><span style={{color:'red'}}>2 - opacity при перовом рендере работает некорректно</span></div>
                 <OpacityAndBlockTest font="googleFont"/>
 
-                <div>(<span style={{color:'red'}}>1 - от буквы "f,T" от верхеней части должен быть паддинг как снизу</span>,<span style={{color:'red'}}>2 - opacity при перовом рендере работает некорректно</span> )</div>
+                <div><span style={{color:'red'}}>1 - от буквы f,T от верхеней части должен быть паддинг как снизу</span></div>
+                <div><span style={{color:'red'}}>2 - opacity при перовом рендере работает некорректно</span></div>
                 <OpacityAndBlockTest font="seroPro"/>
 			
 
-                <div>(<span style={{color:'green'}}>1 - в блоке нормально</span>,<span style={{color:'red'}}>2 - opacity при перовом рендере работает некорректно</span> )</div>
+                <div><span style={{color:'green'}}>1 - в блоке нормально</span></div>
+                <div><span style={{color:'red'}}>2 - opacity при перовом рендере работает некорректно</span></div>
                 <OpacityAndBlockTest font="openSans"/>
 
-                <div>(<span style={{color:'green'}}>1 - в блоке нормально</span>,<span style={{color:'red'}}>2 - opacity вообще неработает</span> )</div>
+                <div><span style={{color:'green'}}>1 - в блоке нормально</span></div>
+                <div><span style={{color:'red'}}>2 - opacity вообще неработает</span></div>
                 <OpacityAndBlockTest font={false}/>
+
+                <div><span style={{color:'green'}}>1 - в блоке нормально</span></div>
+                <div><span style={{color:'green'}}>2 - opacity вообще неработает</span></div>
+                <OpacityAndBlockTest font={'roboto'}/>
 			
 			</div>
 		);
