@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Form } from 'antd';
+import { Icon } from 'antd';
 
 
 
@@ -48,10 +48,11 @@ class Block_MainPage extends React.PureComponent {
 
 	render() {
 		return (
-			<Form>
+			<div>
 				<div>font Ie test</div>
 				<div style={{lineHeight:'1em',maxHeight:'1em',wordBreak:'break-all'}} ref={this.ref} className={"Block_Opacity"}></div>
-			</Form>
+				<div><Icon type="step-backward"/></div>
+			</div>
 		);
 
 	}
