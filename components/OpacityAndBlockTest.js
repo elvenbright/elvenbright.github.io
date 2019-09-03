@@ -51,7 +51,7 @@ class OpacityAndBlockTest extends React.PureComponent {
 			return (
 				<div>
 					<div>{font}</div>
-					<div><span style={{fontFamily:font, border: "1px solid gray"}}>font Ie test</span></div>
+					<div><span style={{fontFamily:font, border: "1px solid gray"}}>font Ie Test</span></div>
 					<div style={{fontFamily:font, lineHeight:'1em',maxHeight:'1em',wordBreak:'break-all'}} ref={this.ref} className={"Block_Opacity"}></div>
 					<hr/><br/>
 				</div>
@@ -61,7 +61,7 @@ class OpacityAndBlockTest extends React.PureComponent {
 			return (
 				<div>
 					<div>{'дэфолтный шрифт antd'}</div>
-					<div><span style={{border: "1px solid gray"}}>font Ie test</span></div>
+					<div><span style={{border: "1px solid gray"}}>font Ie Test</span></div>
 					<div style={{lineHeight:'1em',maxHeight:'1em',wordBreak:'break-all'}} ref={this.ref} className={"Block_Opacity"}></div>
 					<hr/><br/>
 				</div>
