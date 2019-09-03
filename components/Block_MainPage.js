@@ -27,6 +27,9 @@ class Block_MainPage extends React.PureComponent {
 
                 <div>плохой шрифт шрифт</div>
                 <OpacityAndBlockTest font="openSans"/>
+
+                <div>плохой шрифт шрифт</div>
+                <OpacityAndBlockTest font={false}/>
 			
 			</div>
 		);
