@@ -16,7 +16,7 @@ class Block_MainPage extends React.PureComponent {
                 <OpacityAndBlockTest font="googleFont"/>
 
                 <div>плохой шрифт шрифт</div>
-                <OpacityAndBlockTest font="SeroPro"/>
+                <OpacityAndBlockTest font="seroPro"/>
 				<div><Icon type="step-backward"/></div>
 			</div>
 		);
