@@ -1,0 +1,38 @@
+.TableBlockSort{
+    
+    //прячем стандартную сортировку
+    .ant-table-column-sorter{
+        display: none!important;
+    }
+
+    //hover от сортировки (убираем)
+    .ant-table-column-sorters{
+        &:before{
+            display: none!important;
+        }
+    }
+    
+    //убираем hover
+    .ant-table-thead{
+        th{
+            cursor: default!important;
+            //th основной цвет хэдера
+            background: inherit!important;
+        }
+        th:hover{
+            .ant-table-filter-icon{
+                background: inherit !important;
+            }
+        }
+    }
+    //когда меню открыто
+    .ant-table-filter-open{
+        background: inherit !important;
+    }
+    
+    
+}
+
+
+
+

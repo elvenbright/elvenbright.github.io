@@ -1,0 +1,45 @@
+.AntdModal{
+    .ant-modal-title{
+      >div{
+        padding-right: 15px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+    .ResizableBox{
+      .react-resizable-handle{
+        position: absolute;
+        display: block;
+        bottom: 0;
+        right: 0;
+        cursor: move;
+        width: 0;
+        height: 0;
+        border-bottom: 10px solid #b9b9b9;
+        border-left: 10px solid transparent;
+        &:before{
+          content: "";
+          width: 7.2px;
+          height: 7.2px;
+          border: 1px solid gray;
+          border-width: 1px 0 0 1px;
+          transform: rotate(-180deg);
+          position: absolute;
+          bottom: -9px;
+          right: 1px;
+        }
+        &:after{
+          content: "";
+          width: 3.2px;
+          height: 3.2px;
+          border: 1px solid gray;
+          border-width: 1px 0 0 1px;
+          transform: rotate(-180deg);
+          position: absolute;
+          bottom: -7px;
+          right: 3px;
+        }
+      }
+    }
+  }
