@@ -1,12 +1,12 @@
 @font-face {
-	font-family: 'Raleway';
-	src: url('Raleway-Regular.ttf');
+	font-family: 'googleFont';
+	src: url('googleFont.woff');
 	font-style: normal;
 }
 
 
 @font-face {
-	font-family: 'Nosifer';
-	src: url('Nosifer-Regular.ttf');
+	font-family: 'SeroPro';
+	src: url('serpro-medium.woff');
 	font-style: normal;
 }
