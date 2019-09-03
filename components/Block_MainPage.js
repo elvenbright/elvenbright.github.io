@@ -33,7 +33,7 @@ class Block_MainPage extends React.PureComponent {
 			
 
                 <div><span style={{color:'green'}}>1 - в блоке нормально</span></div>
-                <div><span style={{color:'red'}}>2 - opacity при перовом рендере работает некорректно</span></div>
+                <div><span style={{color:'red'}}>2 - opacity при перовом рендере работает некорректно + при ресайзе слитает</span></div>
                 <OpacityAndBlockTest font="openSans"/>
 
                 <div><span style={{color:'green'}}>1 - в блоке нормально</span></div>
@@ -42,7 +42,7 @@ class Block_MainPage extends React.PureComponent {
 
                 <div><span style={{color:'green'}}>тестим</span></div>
                 <div><span style={{color:'green'}}>тестим</span></div>
-                <OpacityAndBlockTest font={'sansPro'}/>
+                <OpacityAndBlockTest font={'robotoMono'}/>
 			
 			</div>
 		);

@@ -18,7 +18,7 @@
 }
 
 @font-face {
-	font-family: 'sansPro';
-	src: url('sansPro/SourceSansPro-Regular.ttf');
+	font-family: 'robotoMono';
+	src: url('robotoMono.ttf');
 	font-style: normal;
 }
