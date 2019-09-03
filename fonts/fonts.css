@@ -10,3 +10,9 @@
 	src: url('seroPro.woff');
 	font-style: normal;
 }
+
+@font-face {
+	font-family: 'openSans';
+	src: url('openSans.woff');
+	font-style: normal;
+}

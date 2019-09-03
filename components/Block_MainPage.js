@@ -10,14 +10,24 @@ class Block_MainPage extends React.PureComponent {
 	render() {
 		return (
 			<div>
-                <div>Readme:(тестировать на windows - chrome) 1 - должна работать opacity при ресайзе  2 - шрифт должен идти по низу блока</div>
+                <div><Icon type="exclamation" /><b>Readme: (тестировать на windows - chrome)</b></div>
+                <div>1 - должна работать opacity при ресайзе</div>
+                <div>2 - шрифт должен идти по низу блока</div>
                 <hr/><br/>
+
+                <div>стандартный шрифт</div>
+                <OpacityAndBlockTest font="Courier New"/>
+
                 <div>нормальный шрифт</div>
                 <OpacityAndBlockTest font="googleFont"/>
 
-                <div>плохой шрифт шрифт</div>
+                <div>от буквы "f" от верхеней части должен быть паддинг как снизу</div>
                 <OpacityAndBlockTest font="seroPro"/>
-				<div><Icon type="step-backward"/></div>
+			
+
+                <div>плохой шрифт шрифт</div>
+                <OpacityAndBlockTest font="openSans"/>
+			
 			</div>
 		);
 
