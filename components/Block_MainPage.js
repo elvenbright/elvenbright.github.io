@@ -14,7 +14,7 @@ class Block_MainPage extends React.PureComponent {
 		return (
 			<div>
                 <div><Icon type="exclamation" /><b>Readme: (тестировать на windows - chrome/ на маке работало корректно)</b></div>
-                <div>1 - маленький шрифт должен идти по низу блока + от от большой буквы должен идти отсуп как от низа</div>
+                <div>1 - маленький шрифт должен чуть ниже центра + от от большой буквы должен идти отсуп как от низа(то есть почти по центру)</div>
                 <div>2 - должна работать opacity при узком экране(сразу поставить узкуий экран и перезаргузить - текст не должен вылазить)</div>
                 
                 <hr/><br/>
@@ -40,9 +40,9 @@ class Block_MainPage extends React.PureComponent {
                 <div><span style={{color:'red'}}>2 - opacity вообще неработает</span></div>
                 <OpacityAndBlockTest font={false}/>
 
-                <div><span style={{color:'green'}}>1 - в блоке нормально</span></div>
-                <div><span style={{color:'green'}}>2 - opacity вообще неработает</span></div>
-                <OpacityAndBlockTest font={'roboto'}/>
+                <div><span style={{color:'green'}}>тестим</span></div>
+                <div><span style={{color:'green'}}>тестим</span></div>
+                <OpacityAndBlockTest font={'sansPro'}/>
 			
 			</div>
 		);
