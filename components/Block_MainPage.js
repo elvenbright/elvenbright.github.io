@@ -19,6 +19,8 @@ class Block_MainPage extends React.PureComponent {
                 
                 <hr/><br/>
 
+               
+
                 <div><span style={{color:'green'}}>1 - в блоке нормально</span></div>
                 <div><span style={{color:'green'}}>2 - opacity - хорошо</span></div>
                 <OpacityAndBlockTest font="Courier New"/>
@@ -40,9 +42,13 @@ class Block_MainPage extends React.PureComponent {
                 <div><span style={{color:'red'}}>2 - opacity вообще неработает</span></div>
                 <OpacityAndBlockTest font={false}/>
 
-                <div><span style={{color:'green'}}>тестим</span></div>
-                <div><span style={{color:'green'}}>тестим</span></div>
-                <OpacityAndBlockTest font={'robotoMono'}/>
+                <div><span style={{color:'green'}}>1 - в блоке нормально</span></div>
+                <div><span style={{color:'red'}}>2 - opacity расстояние между текстом и блоками span(с opacity) - не должно быть</span></div>
+                <OpacityAndBlockTest font={'Alegreya'}/>
+
+                <div><span style={{color:'green'}}>1 - в блоке нормально</span></div>
+                <div><span style={{color:'red'}}>2 - opacity при первой загрузке текста меньше, чем должно быть</span></div>
+                <OpacityAndBlockTest font={'Tinos'}/>
 			
 			</div>
 		);
