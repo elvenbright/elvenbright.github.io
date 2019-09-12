@@ -36,6 +36,7 @@
     "react-resizable": "^1.8.0",
     "react-resize-detector": "^4.2.0",
     "react-drag-listview": "^0.1.4",
-    "dragm": "0.0.3"
+    "dragm": "0.0.3",
+    "@digitalkaoz/preload-polyfill": "^1.22.5"
   }
 }
