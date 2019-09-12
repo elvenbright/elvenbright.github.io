@@ -2,7 +2,7 @@
 	font-family: 'googleFont';
 	src: url('googleFont.woff');
 	font-style: normal;
-	font-display: "block";
+
 }
 
 
@@ -10,28 +10,24 @@
 	font-family: 'seroPro';
 	src: url('seroPro.woff');
 	font-style: normal;
-	font-display: "block";
 }
 
 @font-face {
 	font-family: 'openSans';
 	src: url('openSans.woff');
 	font-style: normal;
-	font-display: "block";
 }
 
 @font-face {
 	font-family: 'Alegreya';
 	src: url('Alegreya.ttf');
 	font-style: normal;
-	font-display: "block";
 }
 
 @font-face {
 	font-family: 'Tinos';
 	src: url('Tinos.ttf');
 	font-style: normal;
-	font-display: "block";
 }
 
 
