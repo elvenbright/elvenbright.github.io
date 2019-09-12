@@ -13,7 +13,7 @@ class Block_MainPage extends React.PureComponent {
 	render() {
 		return (
 			<div>
-                <div><Icon type="exclamation" /><b>Readme: (тестировать на windows - chrome/ на маке работало корректно)</b></div>
+                <div><Icon type="exclamation" /><b>Readme v1.02: (тестировать на windows - chrome/ на маке работало корректно)</b></div>
                 <div>1 - маленький шрифт должен чуть ниже центра + от от большой буквы должен идти отсуп как от низа(то есть почти по центру)</div>
                 <div>2 - должна работать opacity при узком экране(сразу поставить узкуий экран и перезаргузить - текст не должен вылазить)</div>
                 
