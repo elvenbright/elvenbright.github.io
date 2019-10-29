@@ -1,5 +1,5 @@
 //request by url
-function getInf (url){
+function getInfThen (url){
     try{
         fetch("https://fe.it-academy.by/Examples/words_tree/"+url, {
             method: 'GET',
@@ -88,9 +88,6 @@ function response(answer, url){
     }
    
 }
-
-// initial run
-getInf('root.txt');
 
 // insert text
 function insertText(status){
