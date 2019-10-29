@@ -8,7 +8,25 @@
     <div><button onclick="getInfThen('root.txt');">then</button><button onclick="getInfAwait('root.txt');">await</button></div>
 	<div id='container'></div>
     <script src='./then.js'></script>
-    <script src='./await.js'></script>
+    <!-- <script src='./await.js'></script> -->
+    <script>
+        let arr = ["1","2",["3",["4","5"]],"6","7"];
+
+        let answer = [];
+        function trim(item){
+            console.log('---item',item);
+            if(Array.isArray(item)){
+                for(let i=0;item.length>i;i++){
+                    trim(item[i]);
+                }
+            }
+            else if(typeof item === 'string'){
+                answer.push(item);
+            }
+        }
+        trim(arr);
+        console.log('---answer',answer);
+    </script>
     
 </body>
 </html>

@@ -5,17 +5,31 @@ const getInfAwait = async (url) => {
             method: 'GET',
         });
         let text = await answer.text();
+
+        responseHandler(text);
         
-        responseHandler(url, text);
     }
     catch(err){
         console.error('---error request',err);
     }
 };
 
+let answerArr = [];
 
+const responseHandler = async (answer) => {
+   
+    if(answer.length>3 && answer[0]==="[" && answer[answer.length-1] === "]"){
+        let toArr = JSON.parse(answer);
 
-const responseHandler=(url, answer)=>{
-    console.log('---url',url);
-    console.log('---answer',answer);
+        
+        for(let i=0;toArr.length>i;i++) {
+            await getInfAwait(toArr[i]);
+        }
+            
+        
+    }
+    else if(typeof answer === 'string'){
+        answerArr.push(answer);
+    }
+
 }
