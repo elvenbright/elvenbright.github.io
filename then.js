@@ -66,7 +66,7 @@ function response(answer, url){
     for(let i=0;responseObj.length>i;i++){
         if(responseObj[i].requestAnswer===null && responseObj[i].isFetching===false && responseObj[i].isLoaded===false && responseObj[i].isError===false){
             responseObj[i].isFetching=true;
-            getInf(responseObj[i].requestUrl);
+            getInfThen(responseObj[i].requestUrl);
         }
     }
 
