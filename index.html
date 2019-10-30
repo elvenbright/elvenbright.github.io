@@ -5,27 +5,33 @@
 	<title></title>
 </head>
 <body>
-    <div><button onclick="getInfThen('root.txt');">then</button><button onclick="getInfAwait('root.txt');">await</button></div>
+    <div><button onclick="getInfThen('root.txt');">then</button><button onclick="startAwait('root.txt');">await</button></div>
 	<div id='container'></div>
     <script src='./then.js'></script>
-    <!-- <script src='./await.js'></script> -->
+    <script src='./await.js'></script>
     <script>
-        let arr = ["1","2",["3",["4","5"]],"6","7"];
+        // //Promise
+        // var promise1 = new Promise((resolve, reject) => {
+        //     setTimeout(resolve, 2000, "foo");
+        // });
+        // promise1.then((value)=>{
+        //     console.log('---value',value)
+        // })
 
-        let answer = [];
-        function trim(item){
-            console.log('---item',item);
-            if(Array.isArray(item)){
-                for(let i=0;item.length>i;i++){
-                    trim(item[i]);
-                }
-            }
-            else if(typeof item === 'string'){
-                answer.push(item);
-            }
-        }
-        trim(arr);
-        console.log('---answer',answer);
+        // //Promise.all
+        // var p1 = Promise.resolve(3);
+        // var p2 = 1337;
+        // var p3 = new Promise((resolve, reject) => {
+        //     setTimeout(resolve, 1000, "foo");
+        // }); 
+
+        // let arr=[];
+        // Promise.all([p1, p2, p3]).then(value => { 
+        //     console.log(value); 
+        //     arr.push(value);
+        //     console.log('---arr',arr);
+        // });
+        
     </script>
     
 </body>
