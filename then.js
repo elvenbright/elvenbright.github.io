@@ -106,7 +106,9 @@ function insertText(status){
         
     };
 
-    elem.innerHTML = `<div>${str}</div>`;
+    elem.innerHTML = "";
+    elem.innerHTML += `<h3>Then</h3>`;
+    elem.innerHTML += `<div>${str}</div>`;
 
     // if error
     if(status.isLoadedWithError){

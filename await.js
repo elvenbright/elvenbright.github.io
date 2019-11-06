@@ -1,53 +1,75 @@
-let answerArr = []; 
-
+//init run
 const startAwait=async(url)=>{
-    let answer = await getInfAwait(url);
-    
-    //если ответ json
-    if(answer.length>3 && answer[0]==="[" && answer[answer.length-1] === "]"){
-        let answArr = new Promise((resolve, reject) => {
-            resolve(сorrelation(JSON.parse(answer)));
-        })
-        answArr.then((value)=>{
-            console.log('---value',value)
-        })
-        console.log('---wtf in answArr',answArr);
-        answerArr.push(...answArr);
-        console.log('---wtf in answerArr',answerArr);
-    }
-    //если ответ строка
-    else if(typeof answer === 'string'){
-        answerArr.push(answer);
-    }
-    
+    //cycle
+    insertMess(await cycleReq(await getInfAwait(url)));
 }
 
+// cycleReq
+cycleReq=async(e)=>{
+    let isNotReady = false; //if array contain ".txt" file
+
+    let result = [];
+
+    let arr = [];
+    for(let i=0;e.length>i;i++){
+        if(e[i].slice(-4,e[i].length) === '.txt'){
+            arr.push(getInfAwait(e[i]));
+            isNotReady=true;
+        }
+        else{
+            arr.push(e[i]);
+        }
+        
+        
+    }
+    await Promise.all(arr).then(res => {
+        result.push(res.flat());
+    });
+
+    if(isNotReady){
+        return await cycleReq(result.flat());
+    }
+    else{
+        return result.flat();
+
+    }
+}
+
+
+//request
 const getInfAwait = async (url) => {
     try{
         let answer = await fetch("https://fe.it-academy.by/Examples/words_tree/"+url, {
             method: 'GET',
         });
-        let text = await answer.text();
+        let response = await answer.text();
 
-        return text;
+        if(response.length>3 && response[0]==="[" && response[response.length-1] === "]"){
+            return JSON.parse(response);
+        }
+        else if(typeof response === 'string'){
+            return response;
+        }
     }
     catch(err){
         console.error('---error request',err);
+        return "";
     }
 };
 
+// insert text
+const insertMess = (arr) =>{
+    let elem = document.getElementById('container');
 
+    let str = "";
+    for(let i=0;arr.length>i;i++){
+        str+=arr[i];
+        if(arr.length-1!==i&&arr[i]!==""){
+            str+=" ";
+        }
+    };
 
-//получает массив - возвращает массив ответов
-const сorrelation = async (array) => {
-    console.log('---сorrelation in',array);
-   let resultArr = [];
-   for(let i=0;array.length>i;i++){
-        let answer = await getInfAwait(array[i]);
-        resultArr.push(answer);
-   }
-   console.log('---сorrelation out',resultArr);
-   return resultArr;
+    elem.innerHTML = "";
+    elem.innerHTML += `<h3>Await</h3>`;
+    elem.innerHTML += `<div>${str}</div>`;
 }
-
-
