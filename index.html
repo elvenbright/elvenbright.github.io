@@ -1,54 +1,13 @@
 <!DOCTYPE html> 
-<html>
-<head>
-	<meta charset="utf-8" />
-	<title></title>
-</head>
-<body>
-    <p>This is a demo of calling <code>click()</code> on a form's file picker.
-        Note that the file input element is actually hidden here, so the
-        user doesn't have to see the path to the selected file.</p>
-    <form>
-        <input type="file" id="fileElem" multiple accept="image/*" style="display:none" onchange="handleFiles(this.files)">
-    </form>
-    <a href="javascript:doClick()">Select some files</a>
-    <div id="fileList">
-        <p>No files selected!</p>
-    </div>
-    <script type="text/javascript">
-        function doClick() {
-          var el = document.getElementById("fileElem");
-          if (el) {
-            el.click();
-          }
-        }
-        function handleFiles(files) {
-          var d = document.getElementById("fileList");
-          if (!files.length) {
-            d.innerHTML = "<p>No files selected!</p>";
-          } else {
-            var list = document.createElement("ul");
-            d.appendChild(list);
-            for (var i=0; i < files.length; i++) {
-              var li = document.createElement("li");
-              list.appendChild(li);
-              
-              var img = document.createElement("img");
-              img.src = window.URL.createObjectURL(files[i]);;
-              img.height = 60;
-              img.onload = function() {
-                window.URL.revokeObjectURL(this.src);
-              }
-              li.appendChild(img);
-              
-              var info = document.createElement("span");
-              info.innerHTML = files[i].name + ": " + files[i].size + " bytes";
-              li.appendChild(info);
-            }
-          }
-        }
-      </script>
-      <a download href="file.txt">скачать</a>
-      <a download href="file.txt" target="_blank">скачать target="_blank"</a>
-</body>
+<html> 
+<head> 
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title></title>
+  <link rel="stylesheet" type="text/css" href="bundle.css">
+</head> 
+<body> 
+  <div id="container"></div> 
+  <script src="bundle.js"></script>
+</body> 
 </html>
